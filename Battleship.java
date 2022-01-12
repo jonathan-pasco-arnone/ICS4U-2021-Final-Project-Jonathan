@@ -1,5 +1,5 @@
 /*
-* This program uses a custom class.
+* This is the Battleship program.
 *
 * @author  Jonathan Pasco-Arnone
 * @version 1.0
