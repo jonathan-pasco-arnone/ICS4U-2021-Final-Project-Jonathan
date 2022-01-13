@@ -658,7 +658,7 @@ final class Battleship {
                     gameOn = false;
 
                     // Soon to be you lose
-                    artPrinter.pixelArt("you", MAGENTA_BACKGROUND, WHITE_BACKGROUND);
+                    artPrinter.pixelArt("you lose", MAGENTA_BACKGROUND, WHITE_BACKGROUND);
                     System.out.println();
 
                     break;
@@ -1104,7 +1104,7 @@ final class Battleship {
         ArrayList<ArrayList<String>> enemyGrid =
             new ArrayList<ArrayList<String>>();
 
-        // The four tells the program that it is the enemies grid
+        // The 4 tells the program that it is the enemies grid
         enemyGrid = setUpGame(4);
 
         // If the generation failed at any point
