@@ -6,9 +6,8 @@
 * @since   2021-12-20
 */
 
-import java.util.Random;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -22,68 +21,68 @@ final class Battleship {
     /**
     * Number of ships that take up 4 squares - default = 1.
     */
-    private static int numFours = 1;
+    private static final int NUMFOURS = 1;
     /**
     * Number of ships that take up 3 squares - defualt = 3.
     */
-    private static int numThrees = 3;
+    private static final int NUMTHREES = 3;
     /**
     * Number of ships that take up 2 squares - default = 2.
     */
-    private static int numTwos = 2;
+    private static final int NUMTWOS = 2;
     /**
     * Number of ships that take up 1 squares - default = 2.
     */
-    private static int numOnes = 2;
+    private static final int NUMONES = 2;
     /**
     * The amount of rows in the grid - defualt = 10.
     */
-    private static int numRows = 10;
+    private static final int NUMROWS = 10;
     /**
     * The amount of columns in the grid - defualt = 10 - max = 26.
     */
-    private static int numCol = 10;
+    private static final int NUMCOLS = 10;
 
     /**
     * All of the ship quantities in an array.
     */
-    private static ArrayList<Integer> allShipQuantities
-        = new ArrayList<Integer>();
+    private static ArrayList<Integer> allShipQuantities =
+        new ArrayList<Integer>();
 
     /**
     * The amount of ships * 2 (because player and enemy).
     * Exclusively for defineing coordinate holding array.
     */
-    private static int quantityTypesOfShips = 8;
+    private static final int QUANTITYTYPESOFSHIPS = 8;
     /**
     * A 3D array list holding all of the coordinates for all
     * the ships ever generated.
     */
-    private static ArrayList<ArrayList<ArrayList<Integer>>> allShipCoords
-        = new ArrayList<ArrayList<ArrayList<Integer>>>();
+    private static ArrayList<ArrayList<ArrayList<Integer>>> allShipCoords =
+        new ArrayList<ArrayList<ArrayList<Integer>>>();
 
     /**
     * Four as a constant.
     */
-    private static int FOUR = 4;
+    private static final int FOUR = 4;
     /**
     * Three as a constant.
     */
-    private static int THREE = 3;
+    private static final int THREE = 3;
     /**
     * Two as a constant.
     */
-    private static int TWO = 2;
+    private static final int TWO = 2;
     /**
     * One as a constant.
     */
-    private static int ONE = 1;
+    private static final int ONE = 1;
 
     /**
     * The unicode for a blank square.
     * Used as the "water" on the grid.
     */
-    private static String blank = "\u2588"; // A blank background
+    private static String blank = "\u2588";
 
     /**
     * String that tells the player it is their grid.
@@ -100,49 +99,49 @@ final class Battleship {
     * Unicode for changing text color to blue.
     * Used for the "water".
     */
-    private static String BLUE = "\033[0;34m";
+    private static String blue = "\033[0;34m";
     /**
     * Unicode for changing text color to red.
     * Used for hit or sunk.
     */
-    private static String RED = "\033[0;31m";
+    private static String red = "\033[0;31m";
     /**
     * Unicode for changing text color to yellow.
     * Used for miss.
     */
-    private static String YELLOW = "\033[0;33m";
+    private static String yellow = "\033[0;33m";
     /**
     * Unicode for changing text color to a bold version of magenta.
     * Used for end of game.
     */
-    private static String MAGENTA_BOLD = "\033[1;35m";
+    private static String magentaBold = "\033[1;35m";
     /**
     * Unicode for changing text color to a bold version of white.
     * Used for end of game.
     */
-    private static String BOLD_WHITE = "\033[1;37m";
+    private static String whiteBold = "\033[1;37m";
     /**
     * Unicode for changing text background to cyan.
     * Used for end of game.
     */
-    private static String CYAN_BACKGROUND = "\033[46m";
+    private static String cyanBackground = "\033[46m";
     /**
     * Unicode for changing text background to yellow.
     */
-    private static String YELLOW_BACKGROUND = "\033[43m";
+    private static String yellowBackground = "\033[43m";
     /**
     * Unicode for changing text background to magenta.
     */
-    private static String MAGENTA_BACKGROUND = "\033[45m";
+    private static String magentaBackground = "\033[45m";
     /**
     * Unicode for changing text background to white.
     */
-    private static String WHITE_BACKGROUND = "\033[47m";
+    private static String whiteBackground = "\033[47m";
     /**
     * Unicode for changing text color and background color back
     * to its original form.
     */
-    private static String RESET = "\033[0m";
+    private static String reset = "\033[0m";
 
     /**
     * String for grid to represent hit.
@@ -156,6 +155,34 @@ final class Battleship {
     * String for grid to represent sunk.
     */
     private static String sunk = "S";
+    /**
+    * String for four.
+    */
+    private static String fourStr = "4";
+    /**
+    * String for three.
+    */
+    private static String threeStr = "3";
+    /**
+    * String for two.
+    */
+    private static String twoStr = "2";
+    /**
+    * String for one.
+    */
+    private static String oneStr = "1";
+    /**
+    * String for player win.
+    */
+    private static String playerWinStr = "player win";
+    /**
+    * String for enemy win.
+    */
+    private static String enemyWinStr = "enemy win";
+    /**
+    * String for tie.
+    */
+    private static String tieStr = "tie";
 
     /**
     * Char array of the whole alphabet in capital and lower case.
@@ -163,13 +190,13 @@ final class Battleship {
     private static char[] alphabet = ("ABCDEFGHIJKL"
         + "MNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz").toCharArray();
     /**
-    * The amount of capital letters
+    * The amount of capital letters.
     */
-    private static int capitalLetters = 26;
+    private static final int CAPITALLETTERS = 26;
     /**
     * The maximum integer value a char can represent.
     */
-    private static int maxCharValue = 9;
+    private static final int MAXCHARVALUE = 9;
 
     /**
     * Class holding all pixel art.
@@ -189,6 +216,42 @@ final class Battleship {
     }
 
     /**
+    * Places the S's on the grid for sunk.
+    *
+    * @param shipSize the size of the ship
+    * @param shipCoord which ship coord
+    * @param enemy who's turn it is
+    * @param ship which ship
+    * @param grid the grid itself
+    */
+    static void changeToSunk(final int shipSize, final int shipCoord,
+        final int enemy, final int ship,
+        final ArrayList<ArrayList<String>> grid) {
+
+        for (int counter = 0; counter < (shipSize * 2);
+            counter += 2) {
+            /*
+            * The "+ 0" is necessary for changing the index
+            * from an Integer to an int.
+            * Removes the location to have it
+            * replaced with sunk.
+            */
+            grid.get(allShipCoords.get(shipSize + enemy
+                - ONE).get(ship).get(shipCoord
+                - counter)).remove(allShipCoords.get(shipSize
+                + enemy - ONE).get(ship).get(shipCoord
+                - counter + ONE) + 0);
+
+            // Replaces the removed location with sunk
+            grid.get(allShipCoords.get(shipSize + enemy
+                - ONE).get(ship).get(shipCoord
+                - counter)).add(allShipCoords.get(shipSize
+                + enemy - ONE).get(ship).get(shipCoord
+                - counter + ONE), sunk);
+        }
+    }
+
+    /**
     * Tells the player the rules and how to play the game.
     */
     static void rulesAndStart() {
@@ -196,14 +259,14 @@ final class Battleship {
         System.out.println("Welcome to Battleship.\n\n"
             + "This game is very similar to the popularly known board game "
             + "of battleship.\nThe rules are as follows:\n    1. Every turn,"
-            + " you must select a location to attack the opponent on their "
-            + "grid. If the attack is a hit, miss, or sink, then the section"
-            + " labelled\n       \"Enemy Grid\" will display that.\n    2. "
-            + "After your turn, the enemy will select a random location to"
-            + " attack, and it will be displayed on your grid in the same way"
-            + " as your attacks display in theirs.\n    3. The first person "
-            + "to sink all the opposing person's ships is the winner\n    4. "
-            + "Have Fun! ;)");
+            + " you must select a coordinate to attack the opponent on their "
+            + "grid. If the attack is a hit, miss, or sink, then the location"
+            + " will be  labelled\n       \"Enemy Grid\" will display that.\n"
+            + "    2. After your turn, the enemy will select a random "
+            + "coordinate to attack, and it will be displayed on your"
+            + " grid in the same way as your attacks display in theirs.\n"
+            + "    3. The first person to sink all the opposing person's"
+            + " ships is the winner\n    4. Have Fun! ;)");
 
         System.out.println("\nPress enter to begin\n");
 
@@ -220,17 +283,17 @@ final class Battleship {
         * Makes this array cappable of holding all the ships elements
         * for both the player and the enemy
         */
-        for (int typeOfShip = 0; typeOfShip < quantityTypesOfShips;
+        for (int typeOfShip = 0; typeOfShip < QUANTITYTYPESOFSHIPS;
             typeOfShip++) {
 
             allShipCoords.add(new ArrayList<ArrayList<Integer>>());
         }
 
         // Adds all the ship quantities to this array
-        allShipQuantities.add(numOnes);
-        allShipQuantities.add(numTwos);
-        allShipQuantities.add(numThrees);
-        allShipQuantities.add(numFours);
+        allShipQuantities.add(NUMONES);
+        allShipQuantities.add(NUMTWOS);
+        allShipQuantities.add(NUMTHREES);
+        allShipQuantities.add(NUMFOURS);
 
     }
 
@@ -264,46 +327,21 @@ final class Battleship {
                     if (grid.get(allShipCoords.get(shipSize + enemy
                         - ONE).get(ship).get(shipCoord)).get(
                         allShipCoords.get(shipSize + enemy - ONE).get(
-                        ship).get(shipCoord + 1)) == hit) {
+                        ship).get(shipCoord + ONE)) == hit) {
 
                         count++;
                     }
 
                     if (count == shipSize) {
-                        for (int counter = 0; counter < (shipSize * 2);
-                            counter += 2) {
-                            /*
-                            * The "+ 0" is necessary for changing the index
-                            * from an Integer to an int.
-                            * Removes the location to have it
-                            * replaced with sunk.
-                            */
-                            grid.get(allShipCoords.get(shipSize + enemy
-                                - ONE).get(ship).get(shipCoord
-                                - counter)).remove(allShipCoords.get(shipSize
-                                + enemy - ONE).get(ship).get(shipCoord
-                                - counter + 1) + 0);
-
-                            // Replaces the removed location with sunk
-                            grid.get(allShipCoords.get(shipSize + enemy
-                                - ONE).get(ship).get(shipCoord
-                                - counter)).add(allShipCoords.get(shipSize
-                                + enemy - ONE).get(ship).get(shipCoord
-                                - counter + 1), sunk);
-                        }
-                        System.out.print(RED);
+                        changeToSunk(shipSize, shipCoord, enemy, ship, grid);
+                        System.out.print(red);
                         System.out.print("\n\nSHIP SUNK\n\n");
-                        System.out.print(RESET);
+                        System.out.print(reset);
                     }
                 }
             }
         }
     }
-
-
-
-
-
 
     /**
     * Determines if someone has won.
@@ -319,25 +357,25 @@ final class Battleship {
         boolean playerHasShips = false;
         boolean enemyHasShips = false;
 
-        for (int row = 0; row < numRows; row++) {
-             for (int column = 0; column < numCol; column++) {
-                 // If the player has any ships left
-                 if (playerGrid.get(row).get(column).equals("4") ||
-                     playerGrid.get(row).get(column).equals("3") ||
-                     playerGrid.get(row).get(column).equals("2") ||
-                     playerGrid.get(row).get(column).equals("1") ) {
+        for (int row = 0; row < NUMROWS; row++) {
+            for (int column = 0; column < NUMCOLS; column++) {
+                // If the player has any ships left
+                if (playerGrid.get(row).get(column).equals(fourStr)
+                    || playerGrid.get(row).get(column).equals(threeStr)
+                    || playerGrid.get(row).get(column).equals(twoStr)
+                    || playerGrid.get(row).get(column).equals(oneStr)) {
 
-                     playerHasShips = true;
-                 // If the enemy has any ships left
-                 } else if (enemyGrid.get(row).get(column).equals("4") ||
-                     enemyGrid.get(row).get(column).equals("3") ||
-                     enemyGrid.get(row).get(column).equals("2") ||
-                     enemyGrid.get(row).get(column).equals("1") ) {
+                    playerHasShips = true;
+                // If the enemy has any ships left
+                } else if (enemyGrid.get(row).get(column).equals(fourStr)
+                    || enemyGrid.get(row).get(column).equals(threeStr)
+                    || enemyGrid.get(row).get(column).equals(twoStr)
+                    || enemyGrid.get(row).get(column).equals(oneStr)) {
 
-                     enemyHasShips = true;
+                    enemyHasShips = true;
 
-                 }
-             }
+                }
+            }
         }
 
         // Checks what the current outcome of the match is
@@ -346,18 +384,17 @@ final class Battleship {
             returnString = "continue";
         // If the player has ships and the enemy does not
         } else if (playerHasShips && !enemyHasShips) {
-            returnString = "player win";
+            returnString = playerWinStr;
         // If the enemy has ships and the player does not
         } else if (!playerHasShips && enemyHasShips) {
-            returnString = "enemy win";
+            returnString = enemyWinStr;
         // If neither of them has ships
         } else {
-            returnString = "tie";
+            returnString = tieStr;
         }
 
         return returnString;
     }
-
 
     /**
     * Executes the enemies turn.
@@ -369,62 +406,62 @@ final class Battleship {
 
         do {
 
-        Random randRow = new Random();
-        Random randCol = new Random();
+            final Random randRow = new Random();
+            final Random randCol = new Random();
 
-        // Picks a random column that is not higher tan the total columns
-        final int rowCoord = randRow.nextInt(numRows);
-        // Picks a random row that is not higher than the total rows
-        final int columnCoord = randCol.nextInt(numCol);
+            // Picks a random column that is not higher tan the total columns
+            final int rowCoord = randRow.nextInt(NUMROWS);
+            // Picks a random row that is not higher than the total rows
+            final int columnCoord = randCol.nextInt(NUMCOLS);
 
-        /*
-        * Determines the alphabetical value of the random
-        * horizontal coordinate
-        */
-        String horizontalCoordStr = Character.toString(alphabet[columnCoord]);
+            /*
+            * Determines the alphabetical value of the random
+            * horizontal coordinate
+            */
+            final String horizontalCoordStr = Character.toString(alphabet[columnCoord]);
 
-        // If the selected place is blank
-        if (playerGrid.get(rowCoord).get(columnCoord) == blank) {
+            // If the selected place is blank
+            if (playerGrid.get(rowCoord).get(columnCoord) == blank) {
 
-            // Miss
-            playerGrid.get(rowCoord).remove(columnCoord);
-            playerGrid.get(rowCoord).add(columnCoord, miss);
+                // Miss
+                playerGrid.get(rowCoord).remove(columnCoord);
+                playerGrid.get(rowCoord).add(columnCoord, miss);
 
-            // Sets the color to bold white
-            System.out.print(BOLD_WHITE);
+                // Sets the color to bold white
+                System.out.print(whiteBold);
 
-            System.out.println("The computer chose ("
-                + rowCoord + ", " + horizontalCoordStr + ")");
+                System.out.println("The computer chose ("
+                    + rowCoord + "," + horizontalCoordStr + ") ");
 
-            // Resets the color
-            System.out.print(RESET);
-            break;
+                // Resets the color
+                System.out.print(reset);
+                break;
 
-        // If the selected place is a ship
-        } else if (playerGrid.get(rowCoord).get(columnCoord).equals("4") ||
-                   playerGrid.get(rowCoord).get(columnCoord).equals("3") ||
-                   playerGrid.get(rowCoord).get(columnCoord).equals("2") ||
-                   playerGrid.get(rowCoord).get(columnCoord).equals("1")) {
+            // If the selected place is a ship
+            } else if (playerGrid.get(rowCoord).get(columnCoord).equals(fourStr)
+                       || playerGrid.get(rowCoord).get(columnCoord).equals(threeStr)
+                       || playerGrid.get(rowCoord).get(columnCoord).equals(twoStr)
+                       || playerGrid.get(rowCoord).get(columnCoord).equals(oneStr)) {
 
-            // Hit
-            playerGrid.get(rowCoord).remove(columnCoord);
-            playerGrid.get(rowCoord).add(columnCoord, hit);
+                // Hit
+                playerGrid.get(rowCoord).remove(columnCoord);
+                playerGrid.get(rowCoord).add(columnCoord, hit);
 
-            // Sets the color to bold white
-            System.out.print(BOLD_WHITE);
+                // Sets the color to bold white
+                System.out.print(whiteBold);
 
-            System.out.println("The computer chose the vertical"
-                + " coordinate of " + rowCoord + " and the horizontal"
-                + " coordinate of " + horizontalCoordStr);
+                System.out.println("The computer chose the vertical coordina"
+                    + "te of " + rowCoord + " and the horizontal"
+                    + " coordinate of " + horizontalCoordStr);
 
-            // Resets the color
-            System.out.print(RESET);
-            break;
-        }
-        /*
-        * If it is not blank or a ship then it must be a hit or miss
-        * in which case, the while loop will force it to select a new location
-        */
+                // Resets the color
+                System.out.print(reset);
+                break;
+            }
+            /*
+            * If it is not blank or a ship then it must be a hit or miss
+            * in which case, the while loop will force it to select a new location
+            */
 
         } while (true);
     }
@@ -469,7 +506,7 @@ final class Battleship {
             }
 
             // Checks from number 0 to 9
-            for (int row = 0; row <= maxCharValue; row++) {
+            for (int row = 0; row <= MAXCHARVALUE; row++) {
 
                 /*
                 * Checks if the current index is the current row
@@ -488,7 +525,7 @@ final class Battleship {
         }
 
         if (columnCoordStr.length() >= 1) {
-            if (Integer.parseInt(columnCoordStr) >= capitalLetters) {
+            if (Integer.parseInt(columnCoordStr) >= CAPITALLETTERS) {
                 columnCoord = (Integer.parseInt(columnCoordStr)) - 26;
             } else {
                 columnCoord = Integer.parseInt(columnCoordStr);
@@ -506,7 +543,7 @@ final class Battleship {
         }
 
         // If the row is out of bounds or is never assigned
-        if (rowCoord > (numRows - 1) || rowCoord < 0) {
+        if (rowCoord > (NUMROWS - 1) || rowCoord < 0) {
             System.out.println("\nPlease input from the "
                 + "rows available.\n\n");
             throw new java.util.InputMismatchException();
@@ -514,7 +551,7 @@ final class Battleship {
         }
 
         // If the column is never assigned a value or it is out of bounds
-        if (columnCoord < 0 || columnCoord >= numCol) {
+        if (columnCoord < 0 || columnCoord >= NUMCOLS) {
             System.out.println("\nPlease input from the "
                 + "columns available.\n\n");
             throw new java.util.InputMismatchException();
@@ -529,21 +566,21 @@ final class Battleship {
 
         // If the selected place is blank
         } else if (enemyGrid.get(rowCoord).get(columnCoord) == blank) {
-            System.out.print(YELLOW);
+            System.out.print(yellow);
             System.out.println("\nMISS\n\n");
-            System.out.print(RESET);
+            System.out.print(reset);
             enemyGrid.get(rowCoord).remove(columnCoord);
             enemyGrid.get(rowCoord).add(columnCoord, miss);
 
         // If the selected place is a ship
-        } else if (enemyGrid.get(rowCoord).get(columnCoord).equals("4") ||
-                   enemyGrid.get(rowCoord).get(columnCoord).equals("3") ||
-                   enemyGrid.get(rowCoord).get(columnCoord).equals("2") ||
-                   enemyGrid.get(rowCoord).get(columnCoord).equals("1")) {
+        } else if (enemyGrid.get(rowCoord).get(columnCoord).equals(fourStr) ||
+                   enemyGrid.get(rowCoord).get(columnCoord).equals(threeStr) ||
+                   enemyGrid.get(rowCoord).get(columnCoord).equals(twoStr) ||
+                   enemyGrid.get(rowCoord).get(columnCoord).equals(oneStr)) {
 
-            System.out.print(RED);
+            System.out.print(red);
             System.out.println("\nHIT\n\n");
-            System.out.print(RESET);
+            System.out.print(reset);
             enemyGrid.get(rowCoord).remove(columnCoord);
             enemyGrid.get(rowCoord).add(columnCoord, hit);
 
@@ -581,7 +618,7 @@ final class Battleship {
         * The inputted number will be from 0-25. If not then it cannot
         * be assigned an alphabetical value, so it will return nothing.
         */
-        if (number >= capitalLetters) {
+        if (number >= CAPITALLETTERS) {
             returnValue = "";
         } else {
             returnValue = Character.toString(alphabet[number]);
@@ -646,30 +683,30 @@ final class Battleship {
                 * Checks a function to see if the game is over.
                 * If so, who wins? If not, then continue.
                 */
-                if (currentResult.equals("player win")) {
+                if (currentResult.equals(playerWinStr)) {
                     gameOn = false;
 
                     // Prints pixel art of "You Win"
-                    artPrinter.pixelArt("you win", MAGENTA_BACKGROUND, WHITE_BACKGROUND);
+                    artPrinter.pixelArt("you win", magentaBackground, whiteBackground);
                     System.out.println();
 
                     break;
-                } else if (currentResult.equals("enemy win")) {
+                } else if (currentResult.equals(enemyWinStr)) {
                     gameOn = false;
 
                     // Soon to be you lose
-                    artPrinter.pixelArt("you lose", MAGENTA_BACKGROUND, WHITE_BACKGROUND);
+                    artPrinter.pixelArt("you lose", magentaBackground, whiteBackground);
                     System.out.println();
 
                     break;
-                } else if (currentResult.equals("tie")) {
+                } else if (currentResult.equals(tieStr)) {
                     gameOn = false;
 
                     System.out.println("\n\n");
-                    System.out.print(MAGENTA_BOLD);
-                    System.out.print(CYAN_BACKGROUND);
+                    System.out.print(magentaBold);
+                    System.out.print(cyanBackground);
                     System.out.print("You tie.");
-                    System.out.print(RESET);
+                    System.out.print(reset);
                     System.out.println();
 
                     break;
@@ -702,21 +739,21 @@ final class Battleship {
 
         // Prints the letters accross the top
         System.out.print("  ");
-        for (int column = 0; column < numCol; column++) {
+        for (int column = 0; column < NUMCOLS; column++) {
             System.out.print(getLetter(column) + " ");
         }
         System.out.println("");
 
-        for (int row = 0; row < numRows; row++) {
+        for (int row = 0; row < NUMROWS; row++) {
             // Resets the color
-            System.out.print(RESET);
+            System.out.print(reset);
             System.out.print(row + " ");
 
             /*
             * Determines how many spaces to leave between the row
             * value and the grid
             */
-            for (int counter = 0; counter < (String.valueOf(numRows
+            for (int counter = 0; counter < (String.valueOf(NUMROWS
                 - 1).length() - String.valueOf(row).length()); counter++) {
 
                 System.out.print(" ");
@@ -724,25 +761,25 @@ final class Battleship {
 
             grid.add(new ArrayList<String>());
 
-            for (int column = 0; column < numCol; column++) {
+            for (int column = 0; column < NUMCOLS; column++) {
                 int currentIndexNumber = 0;
 
                 if (printGrid.get(row).get(column) == hit) {
                     grid.get(row).add(column, hit);
                     // Sets the color to red
-                    System.out.print(RED);
+                    System.out.print(red);
                 } else if (printGrid.get(row).get(column) == sunk) {
                     grid.get(row).add(column, sunk);
                     // Sets the color to red
-                    System.out.print(RED);
+                    System.out.print(red);
                 } else if (printGrid.get(row).get(column) == miss) {
                     grid.get(row).add(column, miss);
                     // Sets the color to yellow
-                    System.out.print(YELLOW);
+                    System.out.print(yellow);
                 } else {
                     grid.get(row).add(column, blank);
                     // Sets the color to blue
-                    System.out.print(BLUE);
+                    System.out.print(blue);
                 }
 
                 System.out.print(grid.get(row).get(column) + " ");
@@ -750,7 +787,7 @@ final class Battleship {
             System.out.print("\n");
         }
         // Resets the color
-        System.out.print(RESET);
+        System.out.print(reset);
 
     }
 
@@ -763,14 +800,14 @@ final class Battleship {
 
         // Prints the letters accross the top
         System.out.print("  ");
-        for (int column = 0; column < numCol; column++) {
+        for (int column = 0; column < NUMCOLS; column++) {
             System.out.print(getLetter(column) + " ");
         }
         System.out.println("");
 
-        for (int row = 0; row < numRows; row++) {
+        for (int row = 0; row < NUMROWS; row++) {
             // Resets the color
-            System.out.print(RESET); 
+            System.out.print(reset); 
             // Prints all the letters across the side
             System.out.print(row + " ");
 
@@ -779,29 +816,29 @@ final class Battleship {
             * value and the grid
             */
             for (int counter = 0; counter < (String.valueOf(
-                numRows - 1).length() - String.valueOf(row).length());
+                NUMROWS - 1).length() - String.valueOf(row).length());
                 counter++) {
 
                 System.out.print(" ");
             }
 
-            for (int column = 0; column < numCol; column++) {
+            for (int column = 0; column < NUMCOLS; column++) {
                 int currentIndexNumber = 0;
 
                 // If the location is blank
                 if (grid.get(row).get(column) == blank) {
                     // Sets the color to blue
-                    System.out.print(BLUE);
+                    System.out.print(blue);
 
                 // If the current spot is a hit
                 } else if (grid.get(row).get(column).equals(hit)) {
                     // Sets the color to red
-                    System.out.print(RED);
+                    System.out.print(red);
 
                 // If the current spot is a miss
                 } else if (grid.get(row).get(column).equals(miss)) {
                     // Sets the color to yellow
-                    System.out.print(YELLOW);
+                    System.out.print(yellow);
 
                 } else {
                     currentIndexNumber = Integer.parseInt(grid.get(
@@ -811,7 +848,7 @@ final class Battleship {
                 if (currentIndexNumber == 4 || currentIndexNumber == 3
                     || currentIndexNumber == 2 || currentIndexNumber == 1) {
                     // Resets the color
-                    System.out.print(RESET);
+                    System.out.print(reset);
                 }
 
                 System.out.print(grid.get(row).get(column) + " ");
@@ -819,7 +856,7 @@ final class Battleship {
             System.out.print("\n");
         }
         // Resets the color
-        System.out.print(RESET);
+        System.out.print(reset);
     }
 
     /**
@@ -833,11 +870,11 @@ final class Battleship {
         final ArrayList<ArrayList<String>> initialGrid, final int shipSize) {
 
         // Checks all the rows
-        for (int row = 0; row < numRows; row++) {
+        for (int row = 0; row < NUMROWS; row++) {
             int count = 0;
 
             // Checks all the columns
-            for (int column = 0; column < numCol; column++) {
+            for (int column = 0; column < NUMCOLS; column++) {
                 if (initialGrid.get(row).get(column) == blank) {
                     count++;
                 } else {
@@ -863,11 +900,11 @@ final class Battleship {
         final ArrayList<ArrayList<String>> initialGrid, final int shipSize) {
 
         // Checks all the rows
-        for (int row = 0; row < numRows; row++) { 
+        for (int row = 0; row < NUMROWS; row++) { 
             int count = 0;
 
             // Checks all the columns
-            for (int column = 0; column < numCol; column++) {
+            for (int column = 0; column < NUMCOLS; column++) {
                 if (initialGrid.get(row).get(column) == blank) {
                     count++;
                 } else {
@@ -914,12 +951,12 @@ final class Battleship {
                 Random rand = new Random();
                 Random randTwo = new Random();
                 // Picks a random column that is not higher than 10
-                final int randCol = rand.nextInt(numCol);
+                final int randCol = rand.nextInt(NUMCOLS);
                 /*
                 * Picks a random row from the 0th to the last which
                 * happens to be 4
                 */
-                final int randRow = randTwo.nextInt(numRows - shipSize + 1);
+                final int randRow = randTwo.nextInt(NUMROWS - shipSize + 1);
 
                 int count = 0;
                 for (int counter = 0; counter < shipSize; counter++) {
@@ -938,10 +975,10 @@ final class Battleship {
 
                             allShipCoords.get(shipSize + enemy - ONE).get(
                                 allShipCoords.get(shipSize + enemy
-                                - ONE).size() - 1).add(randRow + row);
+                                - ONE).size() - ONE).add(randRow + row);
                             allShipCoords.get(shipSize + enemy - ONE).get(
                                 allShipCoords.get(shipSize + enemy
-                                - ONE).size() - 1).add(randCol);
+                                - ONE).size() - ONE).add(randCol);
                         }
 
                         // A ship has now been generated
@@ -958,12 +995,12 @@ final class Battleship {
                 Random randTwo = new Random();
 
                 // Picks a random column that is not higher than 10
-                final int randCol = rand.nextInt(numCol - shipSize + 1);
+                final int randCol = rand.nextInt(NUMCOLS - shipSize + 1);
                 /*
                 * Picks a random row from the 0th to the last which
                 * happens to be 4
                 */
-                final int randRow = randTwo.nextInt(numRows);
+                final int randRow = randTwo.nextInt(NUMROWS);
 
                 int count = 0;
                 for (int counter = 0; counter < shipSize; counter++) {
@@ -984,10 +1021,10 @@ final class Battleship {
                             */
                             allShipCoords.get(shipSize + enemy - ONE).get(
                                 allShipCoords.get(shipSize + enemy
-                                - ONE).size() - 1).add(randRow);
+                                - ONE).size() - ONE).add(randRow);
                             allShipCoords.get(shipSize + enemy - ONE).get(
                                 allShipCoords.get(shipSize + enemy
-                                - ONE).size() - 1).add(randCol + column);
+                                - ONE).size() - ONE).add(randCol + column);
 
                         }
                         // a ship has now been generated
@@ -1057,12 +1094,12 @@ final class Battleship {
         ArrayList<ArrayList<String>> finalGrid =
             new ArrayList<ArrayList<String>>();
 
-        for (int counter = 0; counter < numRows; counter++) {
+        for (int counter = 0; counter < NUMROWS; counter++) {
             // Adds a new row
             grid.add(new ArrayList<String>());
-            for (int counterTwo = 0; counterTwo < numCol; counterTwo++) {
+            for (int counterTwo = 0; counterTwo < NUMCOLS; counterTwo++) {
                 // Adds a new column and a filler spot for it
-                grid.get(counter).add("\u2588");
+                grid.get(counter).add(blank);
             }
         }
 
@@ -1082,7 +1119,7 @@ final class Battleship {
         rulesAndStart();
 
         // Checks if there are more columns than letters
-        if (numCol > 26) {
+        if (NUMCOLS > 26) {
             System.out.println("There are too many columns. Please make it"
                 + " between 1 and 26");
             // Ends the program
