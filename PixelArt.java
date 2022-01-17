@@ -52,6 +52,14 @@ public class PixelArt {
     * The string for you.
     */
     private static String youStr = "you";
+    /**
+    * The string for win.
+    */
+    private static String winStr = "win";
+    /**
+    * The string for lose.
+    */
+    private static String loseStr = "lose";
 
     /**
     * An empty constructor.

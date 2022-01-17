@@ -234,6 +234,69 @@ final class Battleship {
     }
 
     /**
+    * Determines if the player's input is valid.
+    *
+    * @param enemyGrid the enemies grid
+    * @param rowCoord the row coordinate
+    * @param columnCoord the column coordinate
+    * @throws java.util.InputMismatchException throws the error
+    *     of invalid input
+    */
+    static void playerTurnErrorChecking(
+        ArrayList<ArrayList<String>> enemyGrid, int rowCoord,
+        int columnCoord) {
+
+        // If the row is out of bounds or is never assigned
+        if (rowCoord > (NUMROWS - 1) || rowCoord < 0) {
+            System.out.println("\nPlease input from the rows"
+                + " available.\n\n");
+            throw new java.util.InputMismatchException();
+
+        }
+
+        // If the column is never assigned a value or it is out of bounds
+        if (columnCoord < 0 || columnCoord >= NUMCOLS) {
+            System.out.println("\nPlease input from the "
+                + "columns available.\n\n");
+            throw new java.util.InputMismatchException();
+        }
+
+        // If the selected location has already been attacked
+        if (enemyGrid.get(rowCoord).get(columnCoord).equals(hit)
+            || enemyGrid.get(rowCoord).get(columnCoord).equals(miss)) {
+
+            System.out.println("\nYou have already attacked this area\n\n");
+            throw new java.util.InputMismatchException();
+
+        // If the selected place is blank
+        } else if (enemyGrid.get(rowCoord).get(columnCoord) == blank) {
+            System.out.print(yellow);
+            System.out.println("\nMISS\n\n");
+            System.out.print(reset);
+            enemyGrid.get(rowCoord).remove(columnCoord);
+            enemyGrid.get(rowCoord).add(columnCoord, miss);
+
+        // If the selected place is a ship
+        } else if (enemyGrid.get(rowCoord).get(columnCoord).equals(fourStr)
+            || enemyGrid.get(rowCoord).get(columnCoord).equals(threeStr)
+            || enemyGrid.get(rowCoord).get(columnCoord).equals(twoStr)
+            || enemyGrid.get(rowCoord).get(columnCoord).equals(oneStr)) {
+
+            System.out.print(red);
+            System.out.println("\nHIT\n\n");
+            System.out.print(reset);
+            enemyGrid.get(rowCoord).remove(columnCoord);
+            enemyGrid.get(rowCoord).add(columnCoord, hit);
+
+        // If the location selected is not on the grid
+        } else {
+            System.out.println("\nYou must select a loctaion"
+                + " within the grid\n\n");
+            throw new java.util.InputMismatchException();
+        }
+    }
+
+    /**
     * Places the S's on the grid for sunk.
     *
     * @param shipSize the size of the ship
@@ -543,73 +606,35 @@ final class Battleship {
             }
         }
 
+        // If the column coord is valid
         if (columnCoordStr.length() >= 1) {
+            /*
+            * If the column coord was a lowercase letter
+            * (aka. later in the alphabet array)
+            */
             if (Integer.parseInt(columnCoordStr) >= CAPITALLETTERS) {
                 columnCoord = (Integer.parseInt(columnCoordStr))
                     - CAPITALLETTERS;
+            // If the column coord was a capital letter
             } else {
                 columnCoord = Integer.parseInt(columnCoordStr);
             }
+        // If the column coord is invalid
         } else {
             System.out.println("\nPlease input a column value.\n\n");
             throw new java.util.InputMismatchException();
         }
 
+        // If the row coord is valid
         if (rowCoordStr.length() >= 1) {
             rowCoord = Integer.parseInt(rowCoordStr);
+        // If the column coord is invalid
         } else {
             System.out.println("\nPlease input a rows value.\n\n");
             throw new java.util.InputMismatchException();
         }
 
-        // If the row is out of bounds or is never assigned
-        if (rowCoord > (NUMROWS - 1) || rowCoord < 0) {
-            System.out.println("\nPlease input from the rows"
-                + " available.\n\n");
-            throw new java.util.InputMismatchException();
-
-        }
-
-        // If the column is never assigned a value or it is out of bounds
-        if (columnCoord < 0 || columnCoord >= NUMCOLS) {
-            System.out.println("\nPlease input from the "
-                + "columns available.\n\n");
-            throw new java.util.InputMismatchException();
-        }
-
-        // If the selected location has already been attacked
-        if (enemyGrid.get(rowCoord).get(columnCoord).equals(hit)
-            || enemyGrid.get(rowCoord).get(columnCoord).equals(miss)) {
-
-            System.out.println("\nYou have already attacked this area\n\n");
-            throw new java.util.InputMismatchException();
-
-        // If the selected place is blank
-        } else if (enemyGrid.get(rowCoord).get(columnCoord) == blank) {
-            System.out.print(yellow);
-            System.out.println("\nMISS\n\n");
-            System.out.print(reset);
-            enemyGrid.get(rowCoord).remove(columnCoord);
-            enemyGrid.get(rowCoord).add(columnCoord, miss);
-
-        // If the selected place is a ship
-        } else if (enemyGrid.get(rowCoord).get(columnCoord).equals(fourStr)
-            || enemyGrid.get(rowCoord).get(columnCoord).equals(threeStr)
-            || enemyGrid.get(rowCoord).get(columnCoord).equals(twoStr)
-            || enemyGrid.get(rowCoord).get(columnCoord).equals(oneStr)) {
-
-            System.out.print(red);
-            System.out.println("\nHIT\n\n");
-            System.out.print(reset);
-            enemyGrid.get(rowCoord).remove(columnCoord);
-            enemyGrid.get(rowCoord).add(columnCoord, hit);
-
-        // If the location selected is not on the grid
-        } else {
-            System.out.println("\nYou must select a loctaion"
-                + " within the grid\n\n");
-            throw new java.util.InputMismatchException();
-        }
+        playerTurnErrorChecking(enemyGrid, rowCoord, columnCoord);
 
         System.out.println("You chose (" + rowCoord + ", "
             + alphabet[columnCoord] + ")");
