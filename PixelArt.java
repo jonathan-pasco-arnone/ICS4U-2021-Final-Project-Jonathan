@@ -18,7 +18,7 @@ public class PixelArt {
     /**
     * Amount of buffer lines in "you" string.
     */
-    private static final int bufferLinesQuantity = 23;
+    private static final int BUFFERLINESQUANTITY = 23;
 
     /**
     * Unicode for changing text color and background color back
@@ -118,7 +118,10 @@ public class PixelArt {
                 + onePixel + textColor + onePixel);
         }
         for (int counter = 0; counter < TWO; counter++) {
-            // 5th to top of L / 5th to top of O / 5th to top of S / 5th to top of E
+            /*
+            * 5th to top of L / 5th to top of O
+            * 5th to top of S / 5th to top of E
+            */
             System.out.println(backgroundColor);
             System.out.print(onePixel + onePixel + onePixel + textColor
                 + onePixel);
@@ -138,7 +141,10 @@ public class PixelArt {
                 + onePixel + textColor + onePixel);
         }
         for (int counter = 0; counter < TWO; counter++) {
-            // 7th to top of L / 7th to top of O / 7th to top of S / 7th to top of E
+            /*
+            * 7th to top of L / 7th to top of O
+            * 7th to top of S / 7th to top of E
+            */
             System.out.println(backgroundColor);
             System.out.print(onePixel + onePixel + onePixel + textColor
                 + onePixel);
@@ -159,7 +165,10 @@ public class PixelArt {
                 + onePixel + onePixel + onePixel + onePixel);
         }
         for (int counter = 0; counter < TWO; counter++) {
-            // 9th to top of L / 9th to top of O / 9th to top of S / 9th to top of E
+            /*
+            * 9th to top of L / 9th to top of O
+            * 9th to top of S / 9th to top of E
+            */
             System.out.println(backgroundColor);
             System.out.print(onePixel + onePixel + onePixel + textColor
                 + onePixel);
@@ -180,7 +189,10 @@ public class PixelArt {
                 + onePixel);
         }
         for (int counter = 0; counter < TWO; counter++) {
-            // 11th to top of L / 11th to top of O / 11th to top of S / 11th to top of E
+            /*
+            * 11th to top of L / 11th to top of O
+            * 11th to top of S / 11th to top of E
+            */
             System.out.println(backgroundColor);
             System.out.print(onePixel + onePixel + onePixel + textColor
                 + onePixel);
@@ -200,7 +212,10 @@ public class PixelArt {
                 + onePixel);
         }
         for (int counter = 0; counter < TWO; counter++) {
-            // 13th to top of L / 13th to top of O / 13th to top of S / 13th to top of E
+            /*
+            * 13th to top of L / 13th to top of O
+            * 13th to top of S / 13th to top of E
+            */
             System.out.println(backgroundColor);
             System.out.print(onePixel + onePixel + onePixel + textColor
                 + onePixel);
@@ -220,7 +235,10 @@ public class PixelArt {
                 + onePixel);
         }
         for (int counter = 0; counter < TWO; counter++) {
-            // 15th to top of L / 15th to top of O / 15th to top of S / 15th to top of E
+            /*
+            * 15th to top of L / 15th to top of O
+            * 15th to top of S / 15th to top of E
+            */
             System.out.println(backgroundColor);
             System.out.print(onePixel + onePixel + onePixel + textColor
                 + onePixel + onePixel + onePixel + onePixel + onePixel);
@@ -452,7 +470,7 @@ public class PixelArt {
     public void youArt(final String backgroundColor, final String textColor) {
         // Starting buffer of magenta
         System.out.println(backgroundColor);
-        for (int counter = 0; counter < bufferLinesQuantity; counter++) {
+        for (int counter = 0; counter < BUFFERLINESQUANTITY; counter++) {
             System.out.println(quarterPixel);
         }
         for (int counter = 0; counter < TWO; counter++) {
