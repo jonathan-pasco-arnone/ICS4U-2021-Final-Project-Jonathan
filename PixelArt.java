@@ -283,6 +283,30 @@ public class PixelArt {
     */
     public void winArtPtThree(final String backgroundColor, final String textColor) {
         for (int counter = 0; counter < TWO; counter++) {
+            // 11th to top of W / 11th to top of I / 11th to top of N
+            System.out.println(backgroundColor);
+            System.out.print(onePixel + onePixel + onePixel + onePixel
+                + quarterPixel + textColor + onePixel);
+            System.out.print(backgroundColor);
+            System.out.print(halfPixel + textColor + onePixel);
+            System.out.print(backgroundColor);
+            System.out.print(onePixel + halfPixel + textColor + onePixel);
+            System.out.print(backgroundColor);
+            System.out.print(halfPixel + textColor + onePixel);
+
+            System.out.print(backgroundColor);
+            System.out.print(quarterPixel + onePixel + onePixel + onePixel
+                + onePixel + onePixel + onePixel + textColor + onePixel);
+
+            System.out.print(backgroundColor);
+            System.out.print(onePixel + onePixel + onePixel + onePixel
+                + onePixel + textColor + onePixel);
+            System.out.print(backgroundColor);
+            System.out.print(onePixel + onePixel + textColor + onePixel);
+            System.out.print(backgroundColor);
+            System.out.print(textColor + onePixel);
+        }
+        for (int counter = 0; counter < TWO; counter++) {
             // 13th to top of W / 13th to top of I / 13th to top of N
             System.out.println(backgroundColor);
             System.out.print(onePixel + onePixel + onePixel + onePixel
@@ -386,30 +410,6 @@ public class PixelArt {
             System.out.print(onePixel + halfPixel + textColor + onePixel);
             System.out.print(backgroundColor);
             System.out.print(halfPixel + textColor + onePixel);
-        }
-        for (int counter = 0; counter < TWO; counter++) {
-            // 11th to top of W / 11th to top of I / 11th to top of N
-            System.out.println(backgroundColor);
-            System.out.print(onePixel + onePixel + onePixel + onePixel
-                + quarterPixel + textColor + onePixel);
-            System.out.print(backgroundColor);
-            System.out.print(halfPixel + textColor + onePixel);
-            System.out.print(backgroundColor);
-            System.out.print(onePixel + halfPixel + textColor + onePixel);
-            System.out.print(backgroundColor);
-            System.out.print(halfPixel + textColor + onePixel);
-
-            System.out.print(backgroundColor);
-            System.out.print(quarterPixel + onePixel + onePixel + onePixel
-                + onePixel + onePixel + onePixel + textColor + onePixel);
-
-            System.out.print(backgroundColor);
-            System.out.print(onePixel + onePixel + onePixel + onePixel
-                + onePixel + textColor + onePixel);
-            System.out.print(backgroundColor);
-            System.out.print(onePixel + onePixel + textColor + onePixel);
-            System.out.print(backgroundColor);
-            System.out.print(textColor + onePixel);
         }
         winArtPtThree(backgroundColor, textColor);
     }
@@ -617,7 +617,7 @@ public class PixelArt {
             System.out.print(onePixel + onePixel + onePixel + textColor
                  + onePixel);
         }
-        youArtPtThree(backgroundColor, textColor)
+        youArtPtThree(backgroundColor, textColor);
     }
 
     /**
