@@ -14,13 +14,22 @@ public class PixelArt {
     /**
     * Constant for two.
     */
-    private static int TWO = 2;
+    private static final int TWO = 2;
+    /**
+    * Amount of buffer lines in "you" string.
+    */
+    private static final int bufferLinesQuantity = 23;
 
     /**
     * Unicode for changing text color and background color back
     * to its original form.
     */
-    private static String RESET = "\033[0m";
+    private static final String RESET = "\033[0m";
+
+    /**
+    * The constant for skipping a line.
+    */
+    private static String newLine = "\n";
 
     /**
     * The size of one block in the pixel function.
@@ -40,6 +49,11 @@ public class PixelArt {
     private static String quarterPixel = " ";
 
     /**
+    * The string for you.
+    */
+    private static String youStr = "you";
+
+    /**
     * An empty constructor.
     */
     public PixelArt() {
@@ -55,107 +69,130 @@ public class PixelArt {
     * @param textColor the color of the text
     */
     public void pixelArt(final String title, final String backgroundColor, final String textColor) {
-        if (title.equals("you win")) {
-            pixelArt("you", backgroundColor, textColor);
-            pixelArt("win", backgroundColor, textColor);
+        if ("you win".equals(title)) {
+            pixelArt(youStr, backgroundColor, textColor);
+            pixelArt(winStr, backgroundColor, textColor);
         }
 
-        if (title.equals("you lose")) {
-            pixelArt("you", backgroundColor, textColor);
-            pixelArt("lose", backgroundColor, textColor);
+        if ("you lose".equals(title)) {
+            pixelArt(youStr, backgroundColor, textColor);
+            pixelArt(loseStr, backgroundColor, textColor);
         }
 
-        if (title.equals("win")) {
+        if (title.equals(winStr)) {
             for (int counter = 0; counter < TWO; counter++) {
                 // Top of W / Top of I / Top of N
                 System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel
+                    + textColor + onePixel);
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel
+                    + textColor + onePixel);
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
-    
+                System.out.print(onePixel + onePixel + onePixel
+                    + textColor + onePixel);
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + textColor + onePixel + onePixel + onePixel);
-    
+                System.out.print(onePixel + onePixel + onePixel
+                    + onePixel + textColor + onePixel + onePixel + onePixel);
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + textColor + onePixel + halfPixel);
+                System.out.print(onePixel + onePixel + onePixel
+                    + onePixel + textColor + onePixel + halfPixel);
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + halfPixel + textColor + onePixel);
-            } 
+                System.out.print(onePixel + onePixel + halfPixel
+                    + textColor + onePixel);
+            }
             for (int counter = 0; counter < TWO; counter++) {
                 // Third to top of W / Third to top of I / Third to top of N
                 System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + quarterPixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel
+                    + quarterPixel + textColor + onePixel);
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + halfPixel + textColor + onePixel + halfPixel);
+                System.out.print(onePixel + onePixel + halfPixel
+                    + textColor + onePixel + halfPixel);
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + halfPixel + textColor + onePixel);
-    
+                System.out.print(onePixel + onePixel + halfPixel
+                    + textColor + onePixel);
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + quarterPixel + textColor + onePixel);
-    
+                System.out.print(onePixel + onePixel + onePixel
+                    + onePixel + onePixel + quarterPixel
+                    + textColor + onePixel);
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + textColor + onePixel + onePixel);
+                System.out.print(onePixel + onePixel + onePixel
+                    + onePixel + onePixel + textColor + onePixel + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(onePixel + onePixel + textColor + onePixel);
             }
-            for (int counter = 0; counter < TWO; counter++) { 
+            for (int counter = 0; counter < TWO; counter++) {
                 // 5th to top of W / 5th to top of I / 5th to top of N
                 System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + halfPixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + halfPixel
+                    + textColor + onePixel);
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + textColor + onePixel + onePixel);
+                System.out.print(onePixel + onePixel + textColor + onePixel
+                    + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(onePixel + onePixel + textColor + onePixel);
-    
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + halfPixel + textColor + onePixel);
-    
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + onePixel + halfPixel + textColor + onePixel);
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + onePixel + textColor + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(halfPixel + textColor + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(onePixel + halfPixel + textColor + onePixel);
             }
-            for (int counter = 0; counter < TWO; counter++) { 
+            for (int counter = 0; counter < TWO; counter++) {
                 // 7th to top of W / 7th to top of I / 7th to top of N
                 System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + threeQuarterPixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel
+                    + threeQuarterPixel + textColor + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(onePixel + halfPixel + textColor + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(halfPixel + textColor + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(onePixel + halfPixel + textColor + onePixel);
-    
+
                 System.out.print(backgroundColor);
-                System.out.print(halfPixel + onePixel + onePixel + onePixel + onePixel + onePixel + quarterPixel + textColor + onePixel);
-    
+                System.out.print(halfPixel + onePixel + onePixel + onePixel
+                    + onePixel + onePixel + quarterPixel
+                    + textColor + onePixel);
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + onePixel + textColor + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(onePixel + textColor + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(onePixel + textColor + onePixel);
             }
-            for (int counter = 0; counter < TWO; counter++) { 
+            for (int counter = 0; counter < TWO; counter++) {
                 // 9th to top of W / 9th to top of I / 9th to top of N
                 System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel
+                    + onePixel + textColor + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(onePixel + textColor + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(onePixel + textColor + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(onePixel + textColor + onePixel);
-    
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + onePixel + textColor + onePixel);
-    
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + onePixel + onePixel + textColor + onePixel);
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + onePixel + textColor + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(onePixel + halfPixel + textColor + onePixel);
                 System.out.print(backgroundColor);
@@ -164,19 +201,22 @@ public class PixelArt {
             for (int counter = 0; counter < TWO; counter++) {
                 // 11th to top of W / 11th to top of I / 11th to top of N
                 System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + quarterPixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + quarterPixel + textColor + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(halfPixel + textColor + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(onePixel + halfPixel + textColor + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(halfPixel + textColor + onePixel);
-    
+
                 System.out.print(backgroundColor);
-                System.out.print(quarterPixel + onePixel + onePixel + onePixel + onePixel + onePixel + onePixel + textColor + onePixel);
-    
+                System.out.print(quarterPixel + onePixel + onePixel + onePixel
+                    + onePixel + onePixel + onePixel + textColor + onePixel);
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + onePixel + textColor + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(onePixel + onePixel + textColor + onePixel);
                 System.out.print(backgroundColor);
@@ -185,304 +225,383 @@ public class PixelArt {
             for (int counter = 0; counter < TWO; counter++) {
                 // 13th to top of W / 13th to top of I / 13th to top of N
                 System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + halfPixel + textColor + onePixel + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + halfPixel + textColor + onePixel + onePixel);
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + textColor + onePixel + onePixel);
-    
+                System.out.print(onePixel + onePixel + textColor + onePixel
+                    + onePixel);
+
                 System.out.print(backgroundColor);
-                System.out.print(halfPixel + onePixel + onePixel + onePixel + onePixel + onePixel + onePixel + textColor + onePixel);
-    
+                System.out.print(halfPixel + onePixel + onePixel + onePixel
+                    + onePixel + onePixel + onePixel + textColor + onePixel);
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + onePixel + textColor + onePixel);
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                    + onePixel);
             }
-            for (int counter = 0; counter < TWO; counter++) { 
+            for (int counter = 0; counter < TWO; counter++) {
                 // 15th to top of W / 15th to top of I / 15th to top of N
                 System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + threeQuarterPixel + textColor + onePixel + halfPixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + threeQuarterPixel + textColor + onePixel + halfPixel);
                 System.out.print(backgroundColor);
-                System.out.print(halfPixel + onePixel + onePixel + textColor + onePixel + halfPixel);
-    
+                System.out.print(halfPixel + onePixel + onePixel
+                    + textColor + onePixel + halfPixel);
+
                 System.out.print(backgroundColor);
-                System.out.print(threeQuarterPixel + onePixel + onePixel + onePixel + onePixel + onePixel + textColor + onePixel + onePixel + onePixel);
-    
+                System.out.print(threeQuarterPixel + onePixel + onePixel
+                    + onePixel + onePixel + onePixel + textColor + onePixel
+                    + onePixel + onePixel);
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + textColor + onePixel);
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                    + onePixel);
             }
 
             // Buffer lines
             System.out.print(backgroundColor);
-            System.out.println("\n");
+            System.out.println(newLine);
         }
 
-        if (title.equals("lose")) {
+        if (title.equals(loseStr)) {
             for (int counter = 0; counter < TWO; counter++) {
                 // Top of L / Top of O / Top of S / Top of E
                 System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                    + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + onePixel + textColor + onePixel + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + onePixel + onePixel + textColor + onePixel + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + textColor + onePixel + onePixel + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + textColor + onePixel + onePixel + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel + onePixel + onePixel + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                    + onePixel + onePixel + onePixel + onePixel);
             }
             for (int counter = 0; counter < TWO; counter++) {
-                // Third to top of L / Third to top of O / Third to top of S / Third to top of E
+                /*
+                * Third to top of L / Third to top of O
+                * Third to top of S / Third to top of E
+                */
                 System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                    + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + halfPixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + onePixel + halfPixel + textColor + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(onePixel + textColor + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + halfPixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + halfPixel
+                    + textColor + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + onePixel + textColor + onePixel);
             }
             for (int counter = 0; counter < TWO; counter++) {
                 // 5th to top of L / 5th to top of O / 5th to top of S / 5th to top of E
                 System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                    + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + onePixel + textColor + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(onePixel + onePixel + textColor + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                    + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + onePixel + textColor + onePixel);
             }
             for (int counter = 0; counter < TWO; counter++) {
                 // 7th to top of L / 7th to top of O / 7th to top of S / 7th to top of E
                 System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                    + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + halfPixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + halfPixel + textColor + onePixel);
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                    + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + halfPixel + textColor + onePixel + onePixel + onePixel);
+                System.out.print(onePixel + onePixel + halfPixel + textColor
+                    + onePixel + onePixel + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel + onePixel + onePixel + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                    + onePixel + onePixel + onePixel + onePixel);
             }
             for (int counter = 0; counter < TWO; counter++) {
                 // 9th to top of L / 9th to top of O / 9th to top of S / 9th to top of E
                 System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                    + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + halfPixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + halfPixel + textColor + onePixel);
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                    + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + halfPixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + halfPixel + textColor + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel +  textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                    + onePixel);
             }
             for (int counter = 0; counter < TWO; counter++) {
                 // 11th to top of L / 11th to top of O / 11th to top of S / 11th to top of E
                 System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                    + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + onePixel + textColor + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(onePixel + onePixel + textColor + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + onePixel + textColor + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel +  textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                    + onePixel);
             }
             for (int counter = 0; counter < TWO; counter++) {
                 // 13th to top of L / 13th to top of O / 13th to top of S / 13th to top of E
                 System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                    + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + halfPixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + onePixel + halfPixel + textColor + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(onePixel + textColor + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + halfPixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + onePixel + halfPixel + textColor + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel +  textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                    + onePixel);
             }
             for (int counter = 0; counter < TWO; counter++) {
                 // 15th to top of L / 15th to top of O / 15th to top of S / 15th to top of E
                 System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel + onePixel + onePixel + onePixel + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                    + onePixel + onePixel + onePixel + onePixel + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + textColor + onePixel + onePixel);
+                System.out.print(onePixel + onePixel + textColor + onePixel
+                    + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + textColor + onePixel + onePixel + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                    + textColor + onePixel + onePixel + onePixel);
 
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel + onePixel + onePixel + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                    + onePixel + onePixel + onePixel + onePixel);
             }
-
-
-
-
-
 
             // Buffer lines
             System.out.print(backgroundColor);
-            System.out.println("\n");
+            System.out.println(newLine);
         }
 
-        if (title.equals("you")) {
+        if (title.equals(youStr)) {
             // Starting buffer of magenta
             System.out.println(backgroundColor);
-            for (int counter = 0; counter < 23; counter++) {
+            for (int counter = 0; counter < bufferLinesQuantity; counter++) {
                 System.out.println(quarterPixel);
             }
             for (int counter = 0; counter < TWO; counter++) {
                 // Top of Y / Top of O / Top of U
                 System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                     + onePixel);
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
-    
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                     + onePixel);
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + textColor + onePixel + onePixel);
-    
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                     + textColor + onePixel + onePixel);
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                     + textColor + onePixel);
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
-            }
-            for (int counter = 0; counter < TWO; counter++) { 
-                // Third to top of Y / Third to top of O / Third to top of U 
-                System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + quarterPixel + textColor + onePixel);
-                System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + halfPixel + textColor + onePixel);
-    
-                System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + threeQuarterPixel + textColor + onePixel);
-                System.out.print(backgroundColor);
-                System.out.print(onePixel + textColor + onePixel);
-    
-                System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + halfPixel + textColor + onePixel);
-                System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
-            }
-            for (int counter = 0; counter < TWO; counter++) { 
-                // 5th to top of Y / 5th to top of O / 5th to top of U 
-                System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + halfPixel + textColor + onePixel);
-                System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + textColor + onePixel);
-    
-                System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + halfPixel + textColor + onePixel);
-                System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + textColor + onePixel);
-    
-                System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
-                System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                     + onePixel);
             }
             for (int counter = 0; counter < TWO; counter++) {
-                // 7th to top of Y / 7th to top of O / 7th to top of U 
+                // Third to top of Y / Third to top of O / Third to top of U
                 System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + threeQuarterPixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel
+                     + quarterPixel + textColor + onePixel);
+                System.out.print(backgroundColor);
+                System.out.print(onePixel + onePixel + halfPixel + textColor
+                     + onePixel);
+
+                System.out.print(backgroundColor);
+                System.out.print(onePixel + onePixel + onePixel
+                     + threeQuarterPixel + textColor + onePixel);
+                System.out.print(backgroundColor);
+                System.out.print(onePixel + textColor + onePixel);
+
+                System.out.print(backgroundColor);
+                System.out.print(onePixel + onePixel + onePixel + halfPixel
+                     + textColor + onePixel);
+                System.out.print(backgroundColor);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                     + onePixel);
+            }
+            for (int counter = 0; counter < TWO; counter++) {
+                // 5th to top of Y / 5th to top of O / 5th to top of U
+                System.out.println(backgroundColor);
+                System.out.print(onePixel + onePixel + onePixel + halfPixel
+                     + textColor + onePixel);
+                System.out.print(backgroundColor);
+                System.out.print(onePixel + onePixel + textColor + onePixel);
+
+                System.out.print(backgroundColor);
+                System.out.print(onePixel + onePixel + onePixel + halfPixel
+                     + textColor + onePixel);
+                System.out.print(backgroundColor);
+                System.out.print(onePixel + onePixel + textColor + onePixel);
+
+                System.out.print(backgroundColor);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                     + onePixel);
+                System.out.print(backgroundColor);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                     + onePixel);
+            }
+            for (int counter = 0; counter < TWO; counter++) {
+                // 7th to top of Y / 7th to top of O / 7th to top of U
+                System.out.println(backgroundColor);
+                System.out.print(onePixel + onePixel + onePixel
+                     + threeQuarterPixel + textColor + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(onePixel + halfPixel + textColor + onePixel);
-    
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + halfPixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + halfPixel
+                     + textColor + onePixel);
                 System.out.print(backgroundColor);
-                System.out.print(halfPixel + onePixel + onePixel + textColor + onePixel);
-    
+                System.out.print(halfPixel + onePixel + onePixel + textColor
+                     + onePixel);
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + threeQuarterPixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + threeQuarterPixel
+                     + textColor + onePixel);
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                     + onePixel);
             }
-            for (int counter = 0; counter < TWO; counter++) { 
-                // 9th to top of Y / 9th to top of O / 9th to top of U 
+            for (int counter = 0; counter < TWO; counter++) {
+                // 9th to top of Y / 9th to top of O / 9th to top of U
                 System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                     + textColor + onePixel);
                 System.out.print(textColor + onePixel + onePixel);
-    
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + threeQuarterPixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel
+                     + threeQuarterPixel + textColor + onePixel);
                 System.out.print(backgroundColor);
-                System.out.print(halfPixel + onePixel + onePixel + textColor + onePixel);
-    
+                System.out.print(halfPixel + onePixel + onePixel + textColor
+                     + onePixel);
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + threeQuarterPixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + threeQuarterPixel
+                     + textColor + onePixel);
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                     + onePixel);
             }
-            for (int counter = 0; counter < TWO; counter++) { 
-                // 11th to top of Y / 11th to top of O / 11th to top of U 
+            for (int counter = 0; counter < TWO; counter++) {
+                // 11th to top of Y / 11th to top of O / 11th to top of U
                 System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + textColor + onePixel);
-    
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                     + onePixel + textColor + onePixel);
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                     + onePixel + textColor + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(onePixel + onePixel + textColor + onePixel);
-    
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                     + onePixel);
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                     + onePixel);
             }
             for (int counter = 0; counter < TWO; counter++) {
-                // 13th to top of Y / 13th to top of O / 13th to top of U 
+                // 13th to top of Y / 13th to top of O / 13th to top of U
                 System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + textColor + onePixel);
-    
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                     + onePixel + textColor + onePixel);
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + halfPixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                     + onePixel + halfPixel + textColor + onePixel);
                 System.out.print(backgroundColor);
                 System.out.print(onePixel + textColor + onePixel);
-    
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + halfPixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + halfPixel
+                     + textColor + onePixel);
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel +  textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                     + onePixel);
             }
             for (int counter = 0; counter < TWO; counter++) {
-                // 15th to top of Y / 15th to top of O / 15th to top of U 
+                // 15th to top of Y / 15th to top of O / 15th to top of U
                 System.out.println(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + textColor + onePixel);
-    
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                     + onePixel + textColor + onePixel);
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + onePixel + onePixel + textColor + onePixel + onePixel);
-    
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                     + onePixel + onePixel + textColor + onePixel + onePixel);
+
                 System.out.print(backgroundColor);
-                System.out.print(onePixel + onePixel + onePixel + onePixel + textColor + onePixel);
-                System.out.print(onePixel + onePixel + onePixel + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + onePixel
+                     + textColor + onePixel);
+                System.out.print(onePixel + onePixel + onePixel + textColor
+                     + onePixel);
             }
 
             // Buffer lines
