@@ -293,9 +293,7 @@ final class Battleship {
             System.out.print(red);
             System.out.println("\nHIT\n\n");
             System.out.print(reset);
-            enemyAllShipCoordinates.replace();
-            enemyGrid.get(rowCoord).remove(columnCoord);
-            enemyGrid.get(rowCoord).add(columnCoord, hit);
+            enemyAllShipCoordinates.replace(rowCoord, columnCoord);
 
         // If the location selected is not on the grid
         } else {
@@ -783,38 +781,44 @@ final class Battleship {
                 System.out.print(oneSpace);
             }
 
+            // Prints the main contents of the grid
             for (int column = 0; column < NUMCOLS; column++) {
                 int currentIndexNumber = 0;
-
-                // If the location is blank
-                if (grid.get(row).get(column) == blank) {
-                    // Sets the color to blue
-                    System.out.print(blue);
+                String printText = "";
 
                 // If the current spot is a hit
-                } else if (grid.get(row).get(column).equals(hit)) {
+                if (allShipCoordinates.getHit(row, column)) {
+                    printText = hit;
                     // Sets the color to red
+                    System.out.print(red);
+
+                 // If the current spot is sunk
+                } else if (allShipCoordinates.checkSunk()) {
+                    printText = sunk;
+                    // Sets the color to yellow
                     System.out.print(red);
 
                 // If the current spot is a miss
                 } else if (grid.get(row).get(column).equals(miss)) {
+                    printText = miss;
                     // Sets the color to yellow
                     System.out.print(yellow);
-
-                } else {
-                    currentIndexNumber = Integer.parseInt(grid.get(
-                        row).get(column));
-                }
-
-                if (currentIndexNumber == FOUR
-                    || currentIndexNumber == THREE
-                    || currentIndexNumber == TWO
-                    || currentIndexNumber == ONE) {
+                // If there is no ship there
+                } else if (allShipCoordinates.getShipSize(row, column) < 1) {
+                    printText = blank;
+                    // Sets the color to blue
+                    System.out.print(blue);
+                // If there is a ship but has not been hit or sunk yet
+                } else {                    
+                    // Sets the print text to the the ship size (4, 3, 2, or 1)
+                    printText = Integer.toString(allShipCoordinates.getShipSize(
+                        row, column));
                     // Resets the color
                     System.out.print(reset);
                 }
-
                 System.out.print(grid.get(row).get(column) + oneSpace);
+
+                //System.out.print(printText + oneSpace);
             }
             System.out.print("\n");
         }
@@ -922,8 +926,7 @@ final class Battleship {
                 // Picks a random column that is not higher than 10
                 final int randCol = rand.nextInt(NUMCOLS);
                 /*
-                * Picks a random row from the 0th to the last which
-                * happens to be 4
+                * Picks a random row from 0 - 6 to leav space for the 4 ship spots
                 */
                 final int randRow = randTwo.nextInt(NUMROWS - shipSize + 1);
 
@@ -946,7 +949,7 @@ final class Battleship {
                                 + shipSize);
 
                             locations.add(new ArrayList<Integer>());
-                            locations.get(row).add(randRow - shipSize + row);
+                            locations.get(row).add(randRow + row);
                             locations.get(row).add(randCol);
                         }
 
@@ -998,7 +1001,7 @@ final class Battleship {
 
                             locations.add(new ArrayList<Integer>());
                             locations.get(column).add(randRow);
-                            locations.get(column).add(randCol - shipSize + column);
+                            locations.get(column).add(randCol + column);
                         }
 
                         // If it is the enemy grid
@@ -1094,7 +1097,7 @@ final class Battleship {
     public static void main(final String[] args) {
         setUpArrays();
 
-        rulesAndStart();
+ //       rulesAndStart();
 
         // Checks if there are more columns than letters
         if (NUMCOLS > CAPITALLETTERS) {

@@ -32,16 +32,17 @@ public class Ship {
     * @param initialShipSize the size of the ship
     */
     public Ship(final int initialShipSize, ArrayList<ArrayList<Integer>> initialLocation) {
-        shipSize = initialShipSize;
+        shipSize = initialShipSize;        
         // Checks all the parts of the ship
         for (int counter = 0; counter < shipSize; counter++) {
             location.add(new ArrayList<Integer>());
             // Adds the row coordinate
-            location.get(counter).add(initialLocation.get(counter).get(0));
+            location.get(location.size() - 1).add(initialLocation.get(counter).get(0));
             // Adds the column coordinate
-            location.get(counter).add(initialLocation.get(counter).get(1));
+            location.get(location.size() - 1).add(initialLocation.get(counter).get(1));
             part.add(false);
         }
+        System.out.println(location);
     }
 
     /*
@@ -62,6 +63,30 @@ public class Ship {
                 if (part.get(counter)) {
                     returnValue = true;
                 }
+                break;
+            }
+        }
+
+        return returnValue;
+    }
+
+    /*
+    * Checks if the coordinates matches any parts of the ship.
+    * If any match then it will return the size of the ship.
+    *
+    * @param rowCoord the row coordinate
+    * @param columnCoord the column coordinate
+    * @return returns the ship size.
+    */
+    public int checkShipSize(final int rowCoord, final int columnCoord) {
+        int returnValue = 0;
+        // Checks all the parts of the ship
+        for (int part = 0; part < shipSize; part++) {            
+            // Checks if the location matches a part of the ship
+            if (location.get(part).get(0) == rowCoord &&
+                location.get(part).get(1) == columnCoord) {
+                
+                returnValue = shipSize;
                 break;
             }
         }
@@ -98,7 +123,7 @@ public class Ship {
     *
     * @return returns whether or not the ship is sunk.
     */
-    public boolean partSunk() {
+    public boolean checkSunk() {
         boolean returnValue = false;
         int count = 0;
 

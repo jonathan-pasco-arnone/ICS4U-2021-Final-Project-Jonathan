@@ -19,7 +19,7 @@ public class Fleet {
     /**
     * The total number of ships in this fleet.
     */
-    private static int totalShip;
+    private static int totalShips;
 
     /**
     * An empty constructor.
@@ -47,22 +47,65 @@ public class Fleet {
     * @param columnCoord the column coordinate
     */
     public void replace(final int rowCoord, final int columnCoord) {
-        for (int ship = 0; ship < totalShip; ship++) {
+        for (int ship = 0; ship < totalShips; ship++) {
             shipsDatabase.get(ship).setHit(rowCoord, columnCoord);
         }
     }
 
     /**
-    * Sets a coordinate to be sunk.
+    * Determines if a ship part with the given coords is hit.
     *
     * @param rowCoord the row coordinate
     * @param columnCoord the column coordinate
+    * @return returns whether or not the part is hit.
     */
     public boolean getHit(final int rowCoord, final int columnCoord) {
         boolean returnValue = false;
         // Checks each ship
-        for (int ship = 0; ship < totalShip; ship++) {
+        for (int ship = 0; ship < totalShips; ship++) {
             returnValue = shipsDatabase.get(ship).getHit(rowCoord, columnCoord);
+            // If the coordinate is a hit then break from the loop
+            if (returnValue) {
+                break;
+            }
+        }
+        return returnValue;
+    }
+
+    /**
+    * Determines if there is a ship in the location.
+    * If there are any, then it will return the size of the ship.
+    *
+    * @param rowCoord the row coordinate
+    * @param columnCoord the column coordinate
+    * @return returns the the size of the ship with the inputted location
+    */
+    public int getShipSize(final int rowCoord, final int columnCoord) {
+        int returnValue = 0;
+        // Checks each ship
+        for (int ship = 0; ship < totalShips; ship++) {
+            returnValue = shipsDatabase.get(ship).checkShipSize(rowCoord, columnCoord);
+            /*
+            * If the coordinate has already been gotten, then 
+            * there is no reason to continue
+            */
+            if (returnValue > 0) {
+                break;
+            }
+        }
+        return returnValue;
+    }
+
+    /**
+    * Determines if a ship is sunk.
+    *
+    * @return returns whether or not the part is hit.
+    */
+    public boolean checkSunk() {
+        boolean returnValue = false;
+        // Checks each ship
+        for (int ship = 0; ship < totalShips; ship++) {
+            returnValue = shipsDatabase.get(ship).checkSunk();
             // If the coordinate is a hit then break from the loop
             if (returnValue) {
                 break;
