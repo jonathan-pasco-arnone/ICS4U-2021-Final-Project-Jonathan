@@ -75,7 +75,7 @@ public class PixelArt {
     * @param backgroundColor the background color
     * @param textColor the color of the text
     */
-    public void loseArtPtTwo(final String backgroundColor, final String textColor) {
+    private void loseArtPtTwo(final String backgroundColor, final String textColor) {
         for (int counter = 0; counter < TWO; counter++) {
             /*
             * 9th to top of L / 9th to top of O
@@ -281,7 +281,7 @@ public class PixelArt {
     * @param backgroundColor the background color
     * @param textColor the color of the text
     */
-    public void winArtPtThree(final String backgroundColor, final String textColor) {
+    private void winArtPtThree(final String backgroundColor, final String textColor) {
         for (int counter = 0; counter < TWO; counter++) {
             // 11th to top of W / 11th to top of I / 11th to top of N
             System.out.println(backgroundColor);
@@ -361,7 +361,7 @@ public class PixelArt {
     * @param backgroundColor the background color
     * @param textColor the color of the text
     */
-    public void winArtPtTwo(final String backgroundColor, final String textColor) {
+    private void winArtPtTwo(final String backgroundColor, final String textColor) {
         for (int counter = 0; counter < TWO; counter++) {
             // 7th to top of W / 7th to top of I / 7th to top of N
             System.out.println(backgroundColor);
@@ -504,7 +504,7 @@ public class PixelArt {
     * @param backgroundColor the background color
     * @param textColor the color of the text
     */
-    public void youArtPtThree(final String backgroundColor, final String textColor) {
+    private void youArtPtThree(final String backgroundColor, final String textColor) {
         for (int counter = 0; counter < TWO; counter++) {
             // 13th to top of Y / 13th to top of O / 13th to top of U
             System.out.println(backgroundColor);
@@ -554,7 +554,7 @@ public class PixelArt {
     * @param backgroundColor the background color
     * @param textColor the color of the text
     */
-    public void youArtPtTwo(final String backgroundColor, final String textColor) {
+    private void youArtPtTwo(final String backgroundColor, final String textColor) {
         for (int counter = 0; counter < TWO; counter++) {
             // 7th to top of Y / 7th to top of O / 7th to top of U
             System.out.println(backgroundColor);

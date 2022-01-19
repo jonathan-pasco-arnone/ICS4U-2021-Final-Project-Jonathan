@@ -56,6 +56,16 @@ final class Battleship {
     private static final int QUANTITYTYPESOFSHIPS = 8;
     /**
     * A 3D array list holding all of the coordinates for all
+    * the ships ever generated for the player.
+    */
+    private static Fleet allShipCoordinates = new Fleet();
+    /**
+    * A 3D array list holding all of the coordinates for all
+    * the ships ever generated for the enemy.
+    */
+    private static Fleet enemyAllShipCoordinates = new Fleet();
+    /**
+    * A 3D array list holding all of the coordinates for all
     * the ships ever generated.
     */
     private static ArrayList<ArrayList<ArrayList<Integer>>> allShipCoords =
@@ -262,9 +272,7 @@ final class Battleship {
         }
 
         // If the selected location has already been attacked
-        if (enemyGrid.get(rowCoord).get(columnCoord).equals(hit)
-            || enemyGrid.get(rowCoord).get(columnCoord).equals(miss)) {
-
+        if (allShipCoordinates.getHit(rowCoord, columnCoord)) {
             System.out.println("\nYou have already attacked this area\n\n");
             throw new java.util.InputMismatchException();
 
@@ -285,6 +293,7 @@ final class Battleship {
             System.out.print(red);
             System.out.println("\nHIT\n\n");
             System.out.print(reset);
+            enemyAllShipCoordinates.replace();
             enemyGrid.get(rowCoord).remove(columnCoord);
             enemyGrid.get(rowCoord).add(columnCoord, hit);
 
@@ -293,42 +302,6 @@ final class Battleship {
             System.out.println("\nYou must select a loctaion"
                 + " within the grid\n\n");
             throw new java.util.InputMismatchException();
-        }
-    }
-
-    /**
-    * Places the S's on the grid for sunk.
-    *
-    * @param shipSize the size of the ship
-    * @param shipCoord which ship coord
-    * @param enemy who's turn it is
-    * @param ship which ship
-    * @param grid the grid itself
-    */
-    static void changeToSunk(final int shipSize, final int shipCoord,
-        final int enemy, final int ship,
-        final ArrayList<ArrayList<String>> grid) {
-
-        for (int counter = 0; counter < (shipSize * 2);
-            counter += 2) {
-            /*
-            * The "+ 0" is necessary for changing the index
-            * from an Integer to an int.
-            * Removes the location to have it
-            * replaced with sunk.
-            */
-            grid.get(allShipCoords.get(shipSize + enemy
-                - ONE).get(ship).get(shipCoord
-                - counter)).remove(allShipCoords.get(shipSize
-                + enemy - ONE).get(ship).get(shipCoord
-                - counter + ONE) + 0);
-
-            // Replaces the removed location with sunk
-            grid.get(allShipCoords.get(shipSize + enemy
-                - ONE).get(ship).get(shipCoord
-                - counter)).add(allShipCoords.get(shipSize
-                + enemy - ONE).get(ship).get(shipCoord
-                - counter + ONE), sunk);
         }
     }
 
@@ -360,69 +333,12 @@ final class Battleship {
     * Sets up some of the arrays that will be used in the program.
     */
     static void setUpArrays() {
-        /*
-        * Makes this array cappable of holding all the ships elements
-        * for both the player and the enemy
-        */
-        for (int typeOfShip = 0; typeOfShip < QUANTITYTYPESOFSHIPS;
-            typeOfShip++) {
-
-            allShipCoords.add(new ArrayList<ArrayList<Integer>>());
-        }
-
         // Adds all the ship quantities to this array
         allShipQuantities.add(NUMONES);
         allShipQuantities.add(NUMTWOS);
         allShipQuantities.add(NUMTHREES);
         allShipQuantities.add(NUMFOURS);
 
-    }
-
-    /**
-    * Checks all the ships for either the player or the enemy
-    * to detect if they have sunk.
-    *
-    * @param grid the grid that will be checked
-    * @param enemy wether it is the enemies grid or the players
-    */
-    static void checkSink(final ArrayList<ArrayList<String>> grid,
-        final int enemy) {
-
-        // Goes through all types of ship sizes (1-4)
-        for (int shipSize = 1; shipSize <= FOUR; shipSize++) {
-
-            // Checks every ship
-            for (int ship = 0; ship < allShipQuantities.get(shipSize - ONE);
-                ship++) {
-
-                int count = 0;
-
-                /*
-                * The "* 2" is because the coordinates of the ships area
-                * kept in groups of 2 (row, column), this insures that it
-                * moves to the next set of coordinates
-                */
-                // Checks each set of coordinates
-                for (int shipCoord = 0; shipCoord < (shipSize * 2);
-                    shipCoord += 2) {
-
-                    if (grid.get(allShipCoords.get(shipSize + enemy
-                        - ONE).get(ship).get(shipCoord)).get(
-                        allShipCoords.get(shipSize + enemy - ONE).get(
-                        ship).get(shipCoord + ONE)) == hit) {
-
-                        count++;
-                    }
-
-                    if (count == shipSize) {
-                        changeToSunk(shipSize, shipCoord, enemy, ship, grid);
-                        System.out.print(red);
-                        System.out.print("\n\nSHIP SUNK\n\n");
-                        System.out.print(reset);
-                    }
-                }
-            }
-        }
     }
 
     /**
@@ -699,23 +615,11 @@ final class Battleship {
                 playerTurn(enemyGrid);
 
                 /*
-                * Will check each of the coordinates of the ships to
-                * determine if they have been sunk
-                */
-                checkSink(enemyGrid, 0);
-
-                /*
                 * This function (as with all java functions) uses pointers,
                 * which allows it to change the player grid
                 * without having to return the arrays.
                 */
                 enemyTurn(playerGrid);
-
-                /*
-                * Will check each of the coordinates of the ships to
-                * determine if they have been sunk
-                */
-                checkSink(enemyGrid, FOUR);
 
                 /*
                 * Waits 2 second so the
@@ -1032,18 +936,26 @@ final class Battleship {
                     }
                     if (count == shipSize) {
 
+                        // Temporarily stores all the coordinates to be placed in the ship constructor.
+                        ArrayList<ArrayList<Integer>> locations = new ArrayList<ArrayList<Integer>>();
+
                         // Generates the ship
                         for (int row = 0; row < shipSize; row++) {
                             returnGrid.get(randRow + row).remove(randCol);
                             returnGrid.get(randRow + row).add(randCol, ""
                                 + shipSize);
 
-                            allShipCoords.get(shipSize + enemy - ONE).get(
-                                allShipCoords.get(shipSize + enemy
-                                - ONE).size() - ONE).add(randRow + row);
-                            allShipCoords.get(shipSize + enemy - ONE).get(
-                                allShipCoords.get(shipSize + enemy
-                                - ONE).size() - ONE).add(randCol);
+                            locations.add(new ArrayList<Integer>());
+                            locations.get(row).add(randRow - shipSize + row);
+                            locations.get(row).add(randCol);
+                        }
+
+                        // If it is the enemy grid
+                        if (enemy == 4) {
+                            enemyAllShipCoordinates.makeShip(shipSize, locations);
+                        // If it is the players grid
+                        } else {
+                            allShipCoordinates.makeShip(shipSize, locations);
                         }
 
                         // A ship has now been generated
@@ -1075,23 +987,28 @@ final class Battleship {
                         count++;
                     }
                     if (count == shipSize) {
+
+                        // Temporarily stores all the coordinates to be placed in the ship constructor.
+                        ArrayList<ArrayList<Integer>> locations = new ArrayList<ArrayList<Integer>>();
+
                         for (int column = 0; column < shipSize; column++) {
                             returnGrid.get(randRow).remove(randCol + column);
                             returnGrid.get(randRow).add(randCol + column,
                                 Integer.toString(shipSize));
 
-                            /*
-                            * .size() gets the size of the array, but the
-                            * index we need is always one less
-                            */
-                            allShipCoords.get(shipSize + enemy - ONE).get(
-                                allShipCoords.get(shipSize + enemy
-                                - ONE).size() - ONE).add(randRow);
-                            allShipCoords.get(shipSize + enemy - ONE).get(
-                                allShipCoords.get(shipSize + enemy
-                                - ONE).size() - ONE).add(randCol + column);
-
+                            locations.add(new ArrayList<Integer>());
+                            locations.get(column).add(randRow);
+                            locations.get(column).add(randCol - shipSize + column);
                         }
+
+                        // If it is the enemy grid
+                        if (enemy == 4) {
+                            enemyAllShipCoordinates.makeShip(shipSize, locations);
+                        // If it is the players grid
+                        } else {
+                            allShipCoordinates.makeShip(shipSize, locations);
+                        }
+
                         // a ship has now been generated
                         shipNotGenerated = false;
                     }
@@ -1126,12 +1043,6 @@ final class Battleship {
             // Makes all the ships of type of quantity
             for (int counter = 0; counter < allShipQuantities.get(shipSize
                 - ONE); counter++) {
-                /*
-                * Makes a new ship coordinate holder for either the player
-                * or the enemy
-                */
-                allShipCoords.get(shipSize + enemy - ONE).add(
-                    new ArrayList<Integer>());
 
                 if (returnGrid.get(0).get(0) == failStr) {
                     System.out.println("Could not print "
