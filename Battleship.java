@@ -272,7 +272,8 @@ final class Battleship {
         }
 
         // If the selected location has already been attacked
-        if (allShipCoordinates.getHit(rowCoord, columnCoord)) {
+        if (allShipCoordinates.getHit(rowCoord, columnCoord)
+            || enemyGrid.get(rowCoord).get(columnCoord) == miss) {
             System.out.println("\nYou have already attacked this area\n\n");
             throw new java.util.InputMismatchException();
 
@@ -285,16 +286,13 @@ final class Battleship {
             enemyGrid.get(rowCoord).add(columnCoord, miss);
 
         // If the selected place is a ship
-        } else if (enemyGrid.get(rowCoord).get(columnCoord).equals(fourStr)
-            || enemyGrid.get(rowCoord).get(columnCoord).equals(threeStr)
-            || enemyGrid.get(rowCoord).get(columnCoord).equals(twoStr)
-            || enemyGrid.get(rowCoord).get(columnCoord).equals(oneStr)) {
+        } else if (allShipCoordinates.getShipSize(rowCoord, columnCoord) > 0) {
 
             System.out.print(red);
             System.out.println("\nHIT\n\n");
             System.out.print(reset);
             enemyAllShipCoordinates.replace(rowCoord, columnCoord);
-
+            
         // If the location selected is not on the grid
         } else {
             System.out.println("\nYou must select a loctaion"

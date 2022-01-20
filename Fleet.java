@@ -15,11 +15,11 @@ public class Fleet {
     /**
     * A 2D ArrayList holding all the ships and their data.
     */
-    private static ArrayList<Ship> shipsDatabase;
+    private ArrayList<Ship> shipsDatabase;
     /**
     * The total number of ships in this fleet.
     */
-    private static int totalShips;
+    private int totalShips;
 
     /**
     * An empty constructor.

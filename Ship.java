@@ -15,15 +15,15 @@ public class Ship {
     /**
     * The status of the a part of a ship.
     */
-    private static ArrayList<Boolean> part = new ArrayList<Boolean>();
+    private ArrayList<Boolean> part = new ArrayList<Boolean>();
     /**
     * The location of each part in coordinates.
     */
-    private static ArrayList<ArrayList<Integer>> location = new ArrayList<ArrayList<Integer>>();
+    private ArrayList<ArrayList<Integer>> location = new ArrayList<ArrayList<Integer>>();
     /**
     * The size of the ship.
     */
-    private static int shipSize = 0;
+    private int shipSize;
 
     /**
     * The ship constructor.
@@ -32,7 +32,7 @@ public class Ship {
     * @param initialShipSize the size of the ship
     */
     public Ship(final int initialShipSize, ArrayList<ArrayList<Integer>> initialLocation) {
-        shipSize = initialShipSize;        
+        shipSize = initialShipSize;
         // Checks all the parts of the ship
         for (int counter = 0; counter < shipSize; counter++) {
             location.add(new ArrayList<Integer>());
@@ -42,7 +42,6 @@ public class Ship {
             location.get(location.size() - 1).add(initialLocation.get(counter).get(1));
             part.add(false);
         }
-        System.out.println(location);
     }
 
     /*
