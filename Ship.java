@@ -58,10 +58,9 @@ public class Ship {
             // Checks for the correct coordinates
             if (location.get(counter).get(0) == rowCoord &&
                 location.get(counter).get(1) == columnCoord) {
-                // If the current part is hit
-                if (part.get(counter)) {
-                    returnValue = true;
-                }
+                // Sets the return value to whether the location is a hit or not
+                returnValue = part.get(counter);
+                System.out.println(part.get(counter));
                 break;
             }
         }
@@ -80,11 +79,11 @@ public class Ship {
     public int checkShipSize(final int rowCoord, final int columnCoord) {
         int returnValue = 0;
         // Checks all the parts of the ship
-        for (int part = 0; part < shipSize; part++) {            
+        for (int currentPart = 0; currentPart < shipSize; currentPart++) {            
             // Checks if the location matches a part of the ship
-            if (location.get(part).get(0) == rowCoord &&
-                location.get(part).get(1) == columnCoord) {
-                
+            if (location.get(currentPart).get(0) == rowCoord &&
+                location.get(currentPart).get(1) == columnCoord) {
+
                 returnValue = shipSize;
                 break;
             }
@@ -98,8 +97,10 @@ public class Ship {
     *
     * @param rowCoord the row coordinate
     * @param columnCoord the column coordinate
+    * @returns returns if whether the hit was successful or not
     */
-    public void setHit(final int rowCoord, final int columnCoord) {
+    public boolean setHit(final int rowCoord, final int columnCoord) {
+        boolean returnValue = false;
         // Checks all the parts of the ship
         for (int counter = 0; counter < shipSize; counter++) {
             // Checks for the correct coordinates
@@ -111,29 +112,43 @@ public class Ship {
                     // Sets the part to hit
                     part.remove(counter);
                     part.add(counter, true);
+                    returnValue = true;
                 }
                 break;
             }
         }
+        return returnValue;
     }
 
     /*
     * Checks if the ship is sunk.
     *
+    * @param rowCoord the row coordinate
+    * @param columnCoord the column coordinate
     * @return returns whether or not the ship is sunk.
     */
-    public boolean checkSunk() {
+    public boolean checkSunk(final int rowCoord, final int columnCoord) {
+        // Variables
         boolean returnValue = false;
+        boolean correctShip = false;
         int count = 0;
 
-        for (int counter = 0; counter < shipSize; counter++) {
+        // Checks each part of the ship
+        for (int currentPart = 0; currentPart < shipSize; currentPart++) {
+            // Checks for the correct coordinates
+            if (location.get(currentPart).get(0) == rowCoord &&
+                location.get(currentPart).get(1) == columnCoord) {
+                correctShip = true;
+            }
+
             // If the current part is hit (true == hit)
-            if (part.get(counter)) {
+            if (part.get(currentPart)) {
                 count++;
             }
         }
 
-        if (count == shipSize) {
+        // If every part of the ship is hit and it is the correct ship
+        if (count == shipSize && correctShip) {
             returnValue = true;
         }
 

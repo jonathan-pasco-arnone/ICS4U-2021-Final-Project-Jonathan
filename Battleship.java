@@ -21,19 +21,19 @@ final class Battleship {
     /**
     * Number of ships that take up 4 squares - default = 1.
     */
-    private static final int NUMFOURS = 1;
+    private static final int NUMFOURS = 0;
     /**
     * Number of ships that take up 3 squares - defualt = 3.
     */
-    private static final int NUMTHREES = 3;
+    private static final int NUMTHREES = 0;
     /**
     * Number of ships that take up 2 squares - default = 2.
     */
-    private static final int NUMTWOS = 2;
+    private static final int NUMTWOS = 33;
     /**
     * Number of ships that take up 1 squares - default = 2.
     */
-    private static final int NUMONES = 2;
+    private static final int NUMONES = 0;
     /**
     * The amount of rows in the grid - defualt = 10.
     */
@@ -58,12 +58,12 @@ final class Battleship {
     * A 3D array list holding all of the coordinates for all
     * the ships ever generated for the player.
     */
-    private static Fleet allShipCoordinates = new Fleet();
+    private static Fleet allShips = new Fleet();
     /**
     * A 3D array list holding all of the coordinates for all
     * the ships ever generated for the enemy.
     */
-    private static Fleet enemyAllShipCoordinates = new Fleet();
+    private static Fleet enemyAllShips = new Fleet();
     /**
     * A 3D array list holding all of the coordinates for all
     * the ships ever generated.
@@ -213,9 +213,9 @@ final class Battleship {
     */
     private static final int MAXCHARVALUE = 9;
     /**
-    * The amount of time in a one second pause.
+    * The amount of time in a one second pause - defualt = 1000.
     */
-    private static final int ONESECOND = 1000;
+    private static final int ONESECOND = 1;
 
     /**
     * One space.
@@ -272,7 +272,8 @@ final class Battleship {
         }
 
         // If the selected location has already been attacked
-        if (allShipCoordinates.getHit(rowCoord, columnCoord)
+        if (allShips.getHit(rowCoord, columnCoord)
+            || allShips.checkSunk(rowCoord, columnCoord)
             || enemyGrid.get(rowCoord).get(columnCoord) == miss) {
             System.out.println("\nYou have already attacked this area\n\n");
             throw new java.util.InputMismatchException();
@@ -286,15 +287,16 @@ final class Battleship {
             enemyGrid.get(rowCoord).add(columnCoord, miss);
 
         // If the selected place is a ship
-        } else if (allShipCoordinates.getShipSize(rowCoord, columnCoord) > 0) {
+        } else if (allShips.getShipSize(rowCoord, columnCoord) > 0) {
 
             System.out.print(red);
             System.out.println("\nHIT\n\n");
             System.out.print(reset);
-            enemyAllShipCoordinates.replace(rowCoord, columnCoord);
+            enemyAllShips.replace(rowCoord, columnCoord);
             
         // If the location selected is not on the grid
         } else {
+            System.out.println(enemyGrid.get(rowCoord).get(columnCoord) /*+ " ship size = " + allShips.getShipSize(rowCoord, columnCoord)*/);
             System.out.println("\nYou must select a loctaion"
                 + " within the grid\n\n");
             throw new java.util.InputMismatchException();
@@ -398,6 +400,7 @@ final class Battleship {
     public static void enemyTurn(
         final ArrayList<ArrayList<String>> playerGrid) {
 
+        // Will keep cycling through until a valid coordinate is chosen
         do {
 
             final Random randRow = new Random();
@@ -433,22 +436,16 @@ final class Battleship {
                 break;
 
             // If the selected place is a ship
-            } else if (playerGrid.get(rowCoord).get(columnCoord).equals(
-                fourStr) || playerGrid.get(rowCoord).get(columnCoord).equals(
-                threeStr) || playerGrid.get(rowCoord).get(columnCoord).equals(
-                twoStr) || playerGrid.get(rowCoord).get(columnCoord).equals(
-                oneStr)) {
+            } else if (allShips.getShipSize(rowCoord, columnCoord) > 0) {
 
                 // Hit
-                playerGrid.get(rowCoord).remove(columnCoord);
-                playerGrid.get(rowCoord).add(columnCoord, hit);
+                allShips.setHit(rowCoord, columnCoord);
 
                 // Sets the color to bold white
                 System.out.print(whiteBold);
 
-                System.out.println("The computer chose the vertical coordina"
-                    + "te of " + rowCoord + " and the horizontal"
-                    + " coordinate of " + horizontalCoordStr);
+                System.out.println("The computer chose ("
+                    + rowCoord + "," + horizontalCoordStr + ") ");
 
                 // Resets the color
                 System.out.print(reset);
@@ -783,38 +780,38 @@ final class Battleship {
             for (int column = 0; column < NUMCOLS; column++) {
                 int currentIndexNumber = 0;
                 String printText = "";
-
-                // If the current spot is a hit
-                if (allShipCoordinates.getHit(row, column)) {
-                    printText = hit;
-                    // Sets the color to red
-                    System.out.print(red);
-
-                 // If the current spot is sunk
-                } else if (allShipCoordinates.checkSunk()) {
+                
+                // If the current spot is sunk
+                if (allShips.checkSunk(row, column)) {
                     printText = sunk;
                     // Sets the color to yellow
                     System.out.print(red);
 
+                // If the current spot is a hit
+                } else if (allShips.getHit(row, column)) {
+                    printText = hit;
+                    // Sets the color to red
+                    System.out.print(red);
+                    
                 // If the current spot is a miss
                 } else if (grid.get(row).get(column).equals(miss)) {
                     printText = miss;
                     // Sets the color to yellow
                     System.out.print(yellow);
                 // If there is no ship there
-                } else if (allShipCoordinates.getShipSize(row, column) < 1) {
+                } else if (allShips.getShipSize(row, column) < 1) {
                     printText = blank;
                     // Sets the color to blue
                     System.out.print(blue);
                 // If there is a ship but has not been hit or sunk yet
                 } else {                    
                     // Sets the print text to the the ship size (4, 3, 2, or 1)
-                    printText = Integer.toString(allShipCoordinates.getShipSize(
+                    printText = Integer.toString(allShips.getShipSize(
                         row, column));
                     // Resets the color
                     System.out.print(reset);
                 }
-                System.out.print(grid.get(row).get(column) + oneSpace);
+                System.out.print(printText + oneSpace);
 
                 //System.out.print(printText + oneSpace);
             }
@@ -953,10 +950,10 @@ final class Battleship {
 
                         // If it is the enemy grid
                         if (enemy == 4) {
-                            enemyAllShipCoordinates.makeShip(shipSize, locations);
+                            enemyAllShips.makeShip(shipSize, locations);
                         // If it is the players grid
                         } else {
-                            allShipCoordinates.makeShip(shipSize, locations);
+                            allShips.makeShip(shipSize, locations);
                         }
 
                         // A ship has now been generated
@@ -1004,10 +1001,10 @@ final class Battleship {
 
                         // If it is the enemy grid
                         if (enemy == 4) {
-                            enemyAllShipCoordinates.makeShip(shipSize, locations);
+                            enemyAllShips.makeShip(shipSize, locations);
                         // If it is the players grid
                         } else {
-                            allShipCoordinates.makeShip(shipSize, locations);
+                            allShips.makeShip(shipSize, locations);
                         }
 
                         // a ship has now been generated
