@@ -60,7 +60,7 @@ public class Ship {
                 location.get(counter).get(1) == columnCoord) {
                 // Sets the return value to whether the location is a hit or not
                 returnValue = part.get(counter);
-                System.out.println(part.get(counter));
+                //System.out.println(part.get(counter));
                 break;
             }
         }
@@ -79,7 +79,7 @@ public class Ship {
     public int checkShipSize(final int rowCoord, final int columnCoord) {
         int returnValue = 0;
         // Checks all the parts of the ship
-        for (int currentPart = 0; currentPart < shipSize; currentPart++) {            
+        for (int currentPart = 0; currentPart < shipSize; currentPart++) {
             // Checks if the location matches a part of the ship
             if (location.get(currentPart).get(0) == rowCoord &&
                 location.get(currentPart).get(1) == columnCoord) {

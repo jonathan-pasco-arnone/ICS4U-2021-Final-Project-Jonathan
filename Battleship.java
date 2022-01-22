@@ -29,11 +29,11 @@ final class Battleship {
     /**
     * Number of ships that take up 2 squares - default = 2.
     */
-    private static final int NUMTWOS = 33;
+    private static final int NUMTWOS = 0;
     /**
     * Number of ships that take up 1 squares - default = 2.
     */
-    private static final int NUMONES = 0;
+    private static final int NUMONES = 1;
     /**
     * The amount of rows in the grid - defualt = 10.
     */
@@ -64,12 +64,6 @@ final class Battleship {
     * the ships ever generated for the enemy.
     */
     private static Fleet enemyAllShips = new Fleet();
-    /**
-    * A 3D array list holding all of the coordinates for all
-    * the ships ever generated.
-    */
-    private static ArrayList<ArrayList<ArrayList<Integer>>> allShipCoords =
-        new ArrayList<ArrayList<ArrayList<Integer>>>();
 
     /**
     * Four as a constant.
@@ -272,8 +266,8 @@ final class Battleship {
         }
 
         // If the selected location has already been attacked
-        if (allShips.getHit(rowCoord, columnCoord)
-            || allShips.checkSunk(rowCoord, columnCoord)
+        if (enemyAllShips.getHit(rowCoord, columnCoord)
+            || enemyAllShips.checkSunk(rowCoord, columnCoord)
             || enemyGrid.get(rowCoord).get(columnCoord) == miss) {
             System.out.println("\nYou have already attacked this area\n\n");
             throw new java.util.InputMismatchException();
@@ -287,7 +281,7 @@ final class Battleship {
             enemyGrid.get(rowCoord).add(columnCoord, miss);
 
         // If the selected place is a ship
-        } else if (allShips.getShipSize(rowCoord, columnCoord) > 0) {
+        } else if (enemyAllShips.getShipSize(rowCoord, columnCoord) > 0) {
 
             System.out.print(red);
             System.out.println("\nHIT\n\n");
@@ -296,7 +290,6 @@ final class Battleship {
             
         // If the location selected is not on the grid
         } else {
-            System.out.println(enemyGrid.get(rowCoord).get(columnCoord) /*+ " ship size = " + allShips.getShipSize(rowCoord, columnCoord)*/);
             System.out.println("\nYou must select a loctaion"
                 + " within the grid\n\n");
             throw new java.util.InputMismatchException();
@@ -353,23 +346,23 @@ final class Battleship {
         boolean playerHasShips = false;
         boolean enemyHasShips = false;
 
+        // Determines if the player or the enemy still have ships
         for (int row = 0; row < NUMROWS; row++) {
             for (int column = 0; column < NUMCOLS; column++) {
-                // If the player has any ships left
-                if (playerGrid.get(row).get(column).equals(fourStr)
-                    || playerGrid.get(row).get(column).equals(threeStr)
-                    || playerGrid.get(row).get(column).equals(twoStr)
-                    || playerGrid.get(row).get(column).equals(oneStr)) {
-
-                    playerHasShips = true;
-                // If the enemy has any ships left
-                } else if (enemyGrid.get(row).get(column).equals(fourStr)
-                    || enemyGrid.get(row).get(column).equals(threeStr)
-                    || enemyGrid.get(row).get(column).equals(twoStr)
-                    || enemyGrid.get(row).get(column).equals(oneStr)) {
-
-                    enemyHasShips = true;
-
+                // If the coordinate is a ship
+                if (allShips.getShipSize(row, column) > 0) {
+                    // If the ship is NOT sunk
+                    if (!allShips.checkSunk(row, column)) {
+                        playerHasShips = true;
+                    }
+                }
+                
+                // If the coordinate is a ship
+                if (enemyAllShips.getShipSize(row, column) > 0) {
+                    // If the ship is NOT sunk
+                    if (!enemyAllShips.checkSunk(row, column)) {
+                        enemyHasShips = true;
+                    }
                 }
             }
         }
@@ -684,13 +677,9 @@ final class Battleship {
     /**
     * Prints the enemies grid from the players point of view.
     *
-    * @param printGrid the grid
+    * @param grid the grid
     */
-    static void printEnemyGrid(final ArrayList<ArrayList<String>> printGrid) {
-        // The grid that will be printed
-        final ArrayList<ArrayList<String>> grid =
-            new ArrayList<ArrayList<String>>();
-
+    static void printEnemyGrid(final ArrayList<ArrayList<String>> grid) {
         // Prints the letters accross the top
         System.out.print(twoSpaces);
         for (int column = 0; column < NUMCOLS; column++) {
@@ -713,30 +702,34 @@ final class Battleship {
                 System.out.print(oneSpace);
             }
 
-            grid.add(new ArrayList<String>());
-
             for (int column = 0; column < NUMCOLS; column++) {
-                final int currentIndexNumber = 0;
+                String printText = "";
+                
+                // If the current spot is sunk
+                if (enemyAllShips.checkSunk(row, column)) {
+                    printText = sunk;
+                    // Sets the color to yellow
+                    System.out.print(red);
 
-                if (printGrid.get(row).get(column) == hit) {
-                    grid.get(row).add(column, hit);
+                // If the current spot is a hit
+                } else if (enemyAllShips.getHit(row, column)) {
+                    printText = hit;
                     // Sets the color to red
                     System.out.print(red);
-                } else if (printGrid.get(row).get(column) == sunk) {
-                    grid.get(row).add(column, sunk);
-                    // Sets the color to red
-                    System.out.print(red);
-                } else if (printGrid.get(row).get(column) == miss) {
-                    grid.get(row).add(column, miss);
+                    
+                // If the current spot is a miss
+                } else if (grid.get(row).get(column).equals(miss)) {
+                    printText = miss;
                     // Sets the color to yellow
                     System.out.print(yellow);
+                // If the location has not been attacked yet
                 } else {
-                    grid.get(row).add(column, blank);
+                    printText = blank;
                     // Sets the color to blue
                     System.out.print(blue);
+                // If there is a ship but has not been hit or sunk yet
                 }
-
-                System.out.print(grid.get(row).get(column) + oneSpace);
+                System.out.print(printText + oneSpace);
             }
             System.out.println("");
         }
@@ -778,7 +771,6 @@ final class Battleship {
 
             // Prints the main contents of the grid
             for (int column = 0; column < NUMCOLS; column++) {
-                int currentIndexNumber = 0;
                 String printText = "";
                 
                 // If the current spot is sunk
