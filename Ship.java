@@ -101,7 +101,7 @@ public class Ship {
     *
     * @param rowCoord the row coordinate
     * @param columnCoord the column coordinate
-    * @returns returns if whether the hit was successful or not
+    * @return returns if whether the hit was successful or not
     */
     public boolean setHit(final int rowCoord, final int columnCoord) {
         boolean returnValue = false;

@@ -109,7 +109,7 @@ public class Fleet {
             returnValue = shipsDatabase.get(ship).checkShipSize(
                 rowCoord, columnCoord);
             /*
-            * If the coordinate has already been gotten, then 
+            * If the coordinate has already been gotten, then
             * there is no reason to continue
             */
             if (returnValue > 0) {
