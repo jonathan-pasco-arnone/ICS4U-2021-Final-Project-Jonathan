@@ -19,7 +19,8 @@ public class Ship {
     /**
     * The location of each part in coordinates.
     */
-    private ArrayList<ArrayList<Integer>> location = new ArrayList<ArrayList<Integer>>();
+    private ArrayList<ArrayList<Integer>> location =
+        new ArrayList<ArrayList<Integer>>();
     /**
     * The size of the ship.
     */
@@ -31,20 +32,23 @@ public class Ship {
     * @param initialLocation the initial coordinates of the ships parts
     * @param initialShipSize the size of the ship
     */
-    public Ship(final int initialShipSize, ArrayList<ArrayList<Integer>> initialLocation) {
+    public Ship(final int initialShipSize,
+        final ArrayList<ArrayList<Integer>> initialLocation) {
         shipSize = initialShipSize;
         // Checks all the parts of the ship
         for (int counter = 0; counter < shipSize; counter++) {
             location.add(new ArrayList<Integer>());
             // Adds the row coordinate
-            location.get(location.size() - 1).add(initialLocation.get(counter).get(0));
+            location.get(location.size() - 1).add(
+                initialLocation.get(counter).get(0));
             // Adds the column coordinate
-            location.get(location.size() - 1).add(initialLocation.get(counter).get(1));
+            location.get(location.size() - 1).add(
+                initialLocation.get(counter).get(1));
             part.add(false);
         }
     }
 
-    /*
+    /**
     * Checks if the part is hit.
     *
     * @param rowCoord the row coordinate
@@ -56,8 +60,8 @@ public class Ship {
         // Checks all the parts of the ship
         for (int counter = 0; counter < shipSize; counter++) {
             // Checks for the correct coordinates
-            if (location.get(counter).get(0) == rowCoord &&
-                location.get(counter).get(1) == columnCoord) {
+            if (location.get(counter).get(0) == rowCoord
+                && location.get(counter).get(1) == columnCoord) {
                 // Sets the return value to whether the location is a hit or not
                 returnValue = part.get(counter);
                 //System.out.println(part.get(counter));
@@ -68,7 +72,7 @@ public class Ship {
         return returnValue;
     }
 
-    /*
+    /**
     * Checks if the coordinates matches any parts of the ship.
     * If any match then it will return the size of the ship.
     *
@@ -81,8 +85,8 @@ public class Ship {
         // Checks all the parts of the ship
         for (int currentPart = 0; currentPart < shipSize; currentPart++) {
             // Checks if the location matches a part of the ship
-            if (location.get(currentPart).get(0) == rowCoord &&
-                location.get(currentPart).get(1) == columnCoord) {
+            if (location.get(currentPart).get(0) == rowCoord
+                && location.get(currentPart).get(1) == columnCoord) {
 
                 returnValue = shipSize;
                 break;
@@ -92,7 +96,7 @@ public class Ship {
         return returnValue;
     }
 
-    /*
+    /**
     * Sets a part to hit.
     *
     * @param rowCoord the row coordinate
@@ -104,8 +108,8 @@ public class Ship {
         // Checks all the parts of the ship
         for (int counter = 0; counter < shipSize; counter++) {
             // Checks for the correct coordinates
-            if (location.get(counter).get(0) == rowCoord &&
-                location.get(counter).get(1) == columnCoord) {
+            if (location.get(counter).get(0) == rowCoord
+                && location.get(counter).get(1) == columnCoord) {
 
                 // If the current part is NOT hit
                 if (!part.get(counter)) {
@@ -120,7 +124,7 @@ public class Ship {
         return returnValue;
     }
 
-    /*
+    /**
     * Checks if the ship is sunk.
     *
     * @param rowCoord the row coordinate
@@ -136,8 +140,8 @@ public class Ship {
         // Checks each part of the ship
         for (int currentPart = 0; currentPart < shipSize; currentPart++) {
             // Checks for the correct coordinates
-            if (location.get(currentPart).get(0) == rowCoord &&
-                location.get(currentPart).get(1) == columnCoord) {
+            if (location.get(currentPart).get(0) == rowCoord
+                && location.get(currentPart).get(1) == columnCoord) {
                 correctShip = true;
             }
 

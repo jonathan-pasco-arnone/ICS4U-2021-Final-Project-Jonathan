@@ -35,7 +35,8 @@ public class Fleet {
     * @param initialLocation the initial coordinates of the ships parts
     * @param initialShipSize the size of the ship
     */
-    public void makeShip(final int initialShipSize, ArrayList<ArrayList<Integer>> initialLocation) {
+    public void makeShip(final int initialShipSize,
+        final ArrayList<ArrayList<Integer>> initialLocation) {
         shipsDatabase.add(new Ship(initialShipSize, initialLocation));
         totalShips++;
     }
@@ -83,7 +84,10 @@ public class Fleet {
         for (int ship = 0; ship < totalShips; ship++) {
             // Attempts to execute a hit
             if (shipsDatabase.get(ship).setHit(rowCoord, columnCoord)) {
-                // If the hit was successfull then there is no need to check other ships
+                /*
+                * If the hit was successfull then there is no
+                * need to check other ships
+                */
                 break;
             }
         }
@@ -95,13 +99,15 @@ public class Fleet {
     *
     * @param rowCoord the row coordinate
     * @param columnCoord the column coordinate
-    * @return returns the the size of the ship with the inputted location
+    * @return returns the the size of the ship with the
+    *    inputted location
     */
     public int getShipSize(final int rowCoord, final int columnCoord) {
         int returnValue = 0;
         // Checks each ship
         for (int ship = 0; ship < totalShips; ship++) {
-            returnValue = shipsDatabase.get(ship).checkShipSize(rowCoord, columnCoord);
+            returnValue = shipsDatabase.get(ship).checkShipSize(
+                rowCoord, columnCoord);
             /*
             * If the coordinate has already been gotten, then 
             * there is no reason to continue
@@ -124,7 +130,8 @@ public class Fleet {
         boolean returnValue = false;
         // Checks each ship
         for (int ship = 0; ship < totalShips; ship++) {
-            returnValue = shipsDatabase.get(ship).checkSunk(rowCoord, columnCoord);
+            returnValue = shipsDatabase.get(ship).checkSunk(
+                rowCoord, columnCoord);
             // If the coordinate is a hit then break from the loop
             if (returnValue) {
                 break;

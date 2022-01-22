@@ -75,7 +75,8 @@ public class PixelArt {
     * @param backgroundColor the background color
     * @param textColor the color of the text
     */
-    private void loseArtPtTwo(final String backgroundColor, final String textColor) {
+    private void loseArtPtTwo(final String backgroundColor,
+        final String textColor) {
         for (int counter = 0; counter < TWO; counter++) {
             /*
             * 9th to top of L / 9th to top of O
@@ -181,7 +182,8 @@ public class PixelArt {
     * @param backgroundColor the background color
     * @param textColor the color of the text
     */
-    public void loseArtPtOne(final String backgroundColor, final String textColor) {
+    public void loseArtPtOne(final String backgroundColor,
+        final String textColor) {
         for (int counter = 0; counter < TWO; counter++) {
             // Top of L / Top of O / Top of S / Top of E
             System.out.println(backgroundColor);
@@ -281,7 +283,8 @@ public class PixelArt {
     * @param backgroundColor the background color
     * @param textColor the color of the text
     */
-    private void winArtPtThree(final String backgroundColor, final String textColor) {
+    private void winArtPtThree(final String backgroundColor,
+        final String textColor) {
         for (int counter = 0; counter < TWO; counter++) {
             // 11th to top of W / 11th to top of I / 11th to top of N
             System.out.println(backgroundColor);
@@ -361,7 +364,8 @@ public class PixelArt {
     * @param backgroundColor the background color
     * @param textColor the color of the text
     */
-    private void winArtPtTwo(final String backgroundColor, final String textColor) {
+    private void winArtPtTwo(final String backgroundColor,
+        final String textColor) {
         for (int counter = 0; counter < TWO; counter++) {
             // 7th to top of W / 7th to top of I / 7th to top of N
             System.out.println(backgroundColor);
@@ -422,7 +426,8 @@ public class PixelArt {
     * @param backgroundColor the background color
     * @param textColor the color of the text
     */
-    public void winArtPtOne(final String backgroundColor, final String textColor) {
+    public void winArtPtOne(final String backgroundColor,
+        final String textColor) {
         for (int counter = 0; counter < TWO; counter++) {
             // Top of W / Top of I / Top of N
             System.out.println(backgroundColor);
@@ -504,7 +509,8 @@ public class PixelArt {
     * @param backgroundColor the background color
     * @param textColor the color of the text
     */
-    private void youArtPtThree(final String backgroundColor, final String textColor) {
+    private void youArtPtThree(final String backgroundColor,
+        final String textColor) {
         for (int counter = 0; counter < TWO; counter++) {
             // 13th to top of Y / 13th to top of O / 13th to top of U
             System.out.println(backgroundColor);
@@ -554,7 +560,8 @@ public class PixelArt {
     * @param backgroundColor the background color
     * @param textColor the color of the text
     */
-    private void youArtPtTwo(final String backgroundColor, final String textColor) {
+    private void youArtPtTwo(final String backgroundColor,
+        final String textColor) {
         for (int counter = 0; counter < TWO; counter++) {
             // 7th to top of Y / 7th to top of O / 7th to top of U
             System.out.println(backgroundColor);
@@ -628,7 +635,8 @@ public class PixelArt {
     * @param backgroundColor the background color
     * @param textColor the color of the text
     */
-    public void youArtPtOne(final String backgroundColor, final String textColor) {
+    public void youArtPtOne(final String backgroundColor,
+        final String textColor) {
         // Starting buffer of magenta
         System.out.println(backgroundColor);
         for (int counter = 0; counter < BUFFERLINESQUANTITY; counter++) {
@@ -709,7 +717,8 @@ public class PixelArt {
     * @param backgroundColor the background color
     * @param textColor the color of the text
     */
-    public void pixelArt(final String title, final String backgroundColor, final String textColor) {
+    public void pixelArt(final String title, final String backgroundColor,
+        final String textColor) {
         if ("you win".equals(title)) {
             youArtPtOne(backgroundColor, textColor);
             winArtPtOne(backgroundColor, textColor);
