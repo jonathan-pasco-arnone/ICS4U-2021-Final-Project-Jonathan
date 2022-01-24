@@ -106,16 +106,16 @@ public class Ship {
     public boolean setHit(final int rowCoord, final int columnCoord) {
         boolean returnValue = false;
         // Checks all the parts of the ship
-        for (int counter = 0; counter < shipSize; counter++) {
-            // Checks for the correct coordinates
-            if (location.get(counter).get(0) == rowCoord
-                && location.get(counter).get(1) == columnCoord) {
+        for (int currentPart = 0; currentPart < shipSize; currentPart++) {
+            // Checks if the current part matches the inputted coordinates
+            if (location.get(currentPart).get(0) == rowCoord
+                && location.get(currentPart).get(1) == columnCoord) {
 
                 // If the current part is NOT hit
-                if (!part.get(counter)) {
+                if (!part.get(currentPart)) {
                     // Sets the part to hit
-                    part.remove(counter);
-                    part.add(counter, true);
+                    part.remove(currentPart);
+                    part.add(currentPart, true);
                     returnValue = true;
                 }
                 break;
