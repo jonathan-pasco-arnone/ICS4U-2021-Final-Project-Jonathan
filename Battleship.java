@@ -21,19 +21,19 @@ final class Battleship {
     /**
     * Number of ships that take up 4 squares - default = 1.
     */
-    private static final int NUMFOURS = 1;
+    private static final int NUMFOURS = 0;
     /**
     * Number of ships that take up 3 squares - defualt = 3.
     */
-    private static final int NUMTHREES = 3;
+    private static final int NUMTHREES = 0;
     /**
     * Number of ships that take up 2 squares - default = 2.
     */
-    private static final int NUMTWOS = 2;
+    private static final int NUMTWOS = 0;
     /**
     * Number of ships that take up 1 squares - default = 2.
     */
-    private static final int NUMONES = 2;
+    private static final int NUMONES = 44;
     /**
     * The amount of rows in the grid - defualt = 10.
     */
@@ -192,6 +192,18 @@ final class Battleship {
     * Used for checking if ship generation failed.
     */
     private static String failStr = "fail";
+    /**
+    * String for ship sunk.
+    */
+    private static String sunkStr = "SHIP SUNK\n";
+    /**
+    * String for ship hit.
+    */
+    private static String hitStr = "\nHIT\n";
+    /**
+    * String for miss.
+    */
+    private static String missStr = "\nMISS\n";
 
     /**
     * Char array of the whole alphabet in capital and lower case.
@@ -275,7 +287,7 @@ final class Battleship {
         // If the selected place is blank
         } else if (enemyGrid.get(rowCoord).get(columnCoord) == blank) {
             System.out.print(yellow);
-            System.out.println("\nMISS\n\n");
+            System.out.println(missStr);
             System.out.print(reset);
             enemyGrid.get(rowCoord).remove(columnCoord);
             enemyGrid.get(rowCoord).add(columnCoord, miss);
@@ -284,7 +296,7 @@ final class Battleship {
         } else if (enemyAllShips.getShipSize(rowCoord, columnCoord) > 0) {
 
             System.out.print(red);
-            System.out.println("\nHIT\n\n");
+            System.out.println(hitStr);
             System.out.print(reset);
             enemyAllShips.replace(rowCoord, columnCoord);
 
@@ -424,6 +436,10 @@ final class Battleship {
                 System.out.println("The computer chose ("
                     + rowCoord + "," + horizontalCoordStr + ") ");
 
+                // Sets color to yellow
+                System.out.print(yellow);
+                System.out.println(missStr);
+
                 // Resets the color
                 System.out.print(reset);
                 break;
@@ -439,6 +455,17 @@ final class Battleship {
 
                 System.out.println("The computer chose ("
                     + rowCoord + "," + horizontalCoordStr + ") ");
+
+                // Set color to red
+                System.out.print(red);
+                // Hit text
+                System.out.println(hitStr);
+
+                // If the ship is sunk
+                if (allShips.checkSunk(rowCoord, columnCoord)) {
+                    // Sunk text
+                    System.out.println(sunkStr);
+                }
 
                 // Resets the color
                 System.out.print(reset);
@@ -540,10 +567,18 @@ final class Battleship {
             throw new java.util.InputMismatchException();
         }
 
-        playerTurnErrorChecking(enemyGrid, rowCoord, columnCoord);
-
         System.out.println("You chose (" + rowCoord + ", "
             + alphabet[columnCoord] + ")");
+
+        playerTurnErrorChecking(enemyGrid, rowCoord, columnCoord);
+
+        if (enemyAllShips.checkSunk(rowCoord, columnCoord)) {
+            // Set color to red
+            System.out.print(red);
+
+            // Sunk
+            System.out.println(sunkStr);
+        }
 
         try {
             /*
