@@ -1093,7 +1093,7 @@ final class Battleship {
     public static void main(final String[] args) {
         setUpArrays();
 
- //       rulesAndStart();
+        rulesAndStart();
 
         // Checks if there are more columns than letters
         if (NUMCOLS > CAPITALLETTERS) {
