@@ -106,7 +106,7 @@ public class Fleet {
         int returnValue = 0;
         // Checks each ship
         for (int ship = 0; ship < totalShips; ship++) {
-            returnValue = shipsDatabase.get(ship).checkShipSize(
+            returnValue = shipsDatabase.get(ship).getShipSize(
                 rowCoord, columnCoord);
             /*
             * If the coordinate has already been gotten, then

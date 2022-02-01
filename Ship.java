@@ -80,7 +80,7 @@ public class Ship {
     * @param columnCoord the column coordinate
     * @return returns the ship size.
     */
-    public int checkShipSize(final int rowCoord, final int columnCoord) {
+    public int getShipSize(final int rowCoord, final int columnCoord) {
         int returnValue = 0;
         // Checks all the parts of the ship
         for (int currentPart = 0; currentPart < shipSize; currentPart++) {

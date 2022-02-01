@@ -21,19 +21,19 @@ final class Battleship {
     /**
     * Number of ships that take up 4 squares - default = 1.
     */
-    private static final int NUMFOURS = 0;
+    private static final int NUMFOURS = 1;
     /**
     * Number of ships that take up 3 squares - defualt = 3.
     */
-    private static final int NUMTHREES = 0;
+    private static final int NUMTHREES = 3;
     /**
     * Number of ships that take up 2 squares - default = 2.
     */
-    private static final int NUMTWOS = 0;
+    private static final int NUMTWOS = 2;
     /**
     * Number of ships that take up 1 squares - default = 2.
     */
-    private static final int NUMONES = 44;
+    private static final int NUMONES = 2;
     /**
     * The amount of rows in the grid - defualt = 10.
     */
